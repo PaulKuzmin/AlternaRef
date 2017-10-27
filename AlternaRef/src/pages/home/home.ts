@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { TnvedSource } from "../../providers/tnvedsource";
+import { TnvCodePage } from "../tnvcode/tnvcode";
 
 @Component({
   selector: 'page-home',
@@ -12,12 +13,9 @@ import { TnvedSource } from "../../providers/tnvedsource";
 export class HomePage {
 
     nodes: Array<any> = [];
-    history: Array<any> = [];
     loaderIndicator: any;
-    currentId: any = 0;
     isShowFooter: boolean = false;
-    isShowCodeData: boolean = false;
-    codeData: any;
+    id: number = 0;
 
     constructor(
         public navParams: NavParams,
@@ -25,58 +23,27 @@ export class HomePage {
         public loadingCtrl: LoadingController,
         public tnvedSource: TnvedSource
     ) {
-        console.log(navParams.get('userParams'));
-        this.loadNode(0);
+        this.id = navParams.get('id') && navParams.get('id') || 0;        
+    }
+
+    ionViewDidLoad() {
+        this.loadNode(this.id);
     }
 
     nodeOnClick(node: any) {
-        this.history.push(this.currentId);                
-
         if (node.has_childs == 0) {
-            this.currentId = 'c_' + node.kod;
-            this.loadCode(node.kod)
+            this.navCtrl.push(TnvCodePage, {
+                code: node.kod
+            });
         } else {
-            this.currentId = node.idx;
-            this.loadNode(node.idx);            
+            this.navCtrl.push(HomePage, {
+                id: node.idx
+            });
         }
     }
 
     goTop() {
-        this.history = [];
-        //this.loadNode(0);     
-        this.navCtrl.push(HomePage, {
-            userParams: "value 1"
-        })
-        
-    }
-
-    goBack() {
-        let previd = this.history.pop();
-        let id = previd && previd || 0;
-
-        if (id && (<string>id).startsWith("c_")) {
-            this.loadCode((<string>id).replace("c_",""));
-        } else {
-            this.loadNode(id);
-        }
-    }
-
-    loadCode(code: string) {
-        this.loaderIndicator = this.loadingCtrl.create({
-            content: "Загрузка..."
-        });
-        this.loaderIndicator.present();
-        this.tnvedSource.getCode(code).then(
-            data => {
-                console.log(data);
-                this.codeData = data;
-                this.isShowCodeData = true;
-                this.loaderIndicator.dismiss();
-            },
-            error => {
-                console.error(error);
-                this.loaderIndicator.dismiss();
-            });
+        this.loadNode(0);
     }
 
     loadNode(id: number) {
@@ -86,20 +53,14 @@ export class HomePage {
         this.loaderIndicator.present();
         this.isShowFooter = (id != 0);
 
-        if (id == 0) {
-            this.history = [];
-        }
-
         this.tnvedSource.getNode(id).then(
             data => {
                 //console.log(data);
-                this.nodes = data.nodes;                
-                this.isShowCodeData = false;
+                this.nodes = data.nodes;
                 this.loaderIndicator.dismiss();
             },
             error => {
                 console.error(error);
-                this.isShowCodeData = false;
                 this.loaderIndicator.dismiss();
             });
     }

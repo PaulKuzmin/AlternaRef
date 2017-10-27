@@ -1,18 +1,214 @@
-<!--
-  Generated template for the NewPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>tnvcode</ion-title>
-  </ion-navbar>
-
+    <ion-navbar>
+        <ion-title>{{codeData?.code}}</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
+    <ion-card>
+        <ion-card-content>
+            {{codeData?.name}}
+        </ion-card-content>
 
+        <!--
+            'import_tax'
+            'export_tax'
+            'vat'
+            'excise'
+            'special'
+            'ensuring'
+        -->
+        <!--import_tax-->
+        <div [hidden]="!codeData?.data?.import_tax">
+            <ion-card-header>
+                {{codeData?.data?.import_tax?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.import_tax?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--export_tax-->
+        <div [hidden]="!codeData?.data?.export_tax">
+            <ion-card-header>
+                {{codeData?.data?.export_tax?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.export_tax?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--vat-->
+        <div [hidden]="!codeData?.data?.vat">
+            <ion-card-header>
+                {{codeData?.data?.vat?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.vat?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--excise-->
+        <div [hidden]="!codeData?.data?.excise">
+            <ion-card-header>
+                {{codeData?.data?.excise?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.excise?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--special-->
+        <div [hidden]="!codeData?.data?.special">
+            <ion-card-header>
+                {{codeData?.data?.special?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.special?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--ensuring-->
+        <div [hidden]="!codeData?.data?.ensuring">
+            <ion-card-header>
+                {{codeData?.data?.ensuring?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.ensuring?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--
+            *documents
+                restrictions
+                license
+                certificates
+                others
+        -->
+        <div [hidden]="!codeData?.data?.documents">
+            <ion-card-header>
+                Документы, лиценции, сертификаты и т.п.
+            </ion-card-header>
+
+            <!--restrictions-->
+            <div [hidden]="!codeData?.data?.documents?.restrictions">
+                <ion-card-header>
+                    {{codeData?.data?.documents?.restrictions?.name}}
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row *ngFor="let row of codeData?.data?.documents?.restrictions?.data">
+                            <ion-col>
+                                {{row.description}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </div>
+
+            <!--license-->
+            <div [hidden]="!codeData?.data?.documents?.license">
+                <ion-card-header>
+                    {{codeData?.data?.documents?.license?.name}}
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row *ngFor="let row of codeData?.data?.documents?.license?.data">
+                            <ion-col>
+                                {{row.description}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </div>
+
+            <!--certificates-->
+            <div [hidden]="!codeData?.data?.documents?.certificates">
+                <ion-card-header>
+                    {{codeData?.data?.documents?.certificates?.name}}
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row *ngFor="let row of codeData?.data?.documents?.certificates?.data">
+                            <ion-col>
+                                {{row.description}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </div>
+
+            <!--others-->
+            <div [hidden]="!codeData?.data?.documents?.others">
+                <ion-card-header>
+                    {{codeData?.data?.documents?.others?.name}}
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row *ngFor="let row of codeData?.data?.documents?.others?.data">
+                            <ion-col>
+                                {{row.description}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </div>
+
+        </div>
+    </ion-card>
 </ion-content>

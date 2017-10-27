@@ -1,22 +1,24 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { CalcPage } from '../pages/calc/calc';
+import { AutoCalcPage } from '../pages/autocalc/autocalc';
 import { HomePage } from '../pages/home/home';
 import { RoisPage } from '../pages/rois/rois';
 import { TabsPage } from '../pages/tabs/tabs';
+import { TnvCodePage } from "../pages/tnvcode/tnvcode";
 import { DataSource } from '../providers/datasource';
 import { TnvedSource } from '../providers/tnvedsource';
 
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    CalcPage,
+    AutoCalcPage,
     HomePage,
     RoisPage,
-    TabsPage
+    TabsPage,
+    TnvCodePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -24,11 +26,12 @@ import { TnvedSource } from '../providers/tnvedsource';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    CalcPage,
+    AutoCalcPage,
     HomePage,
     RoisPage,
-    TabsPage
+    TabsPage,
+    TnvCodePage
   ],
   providers: [DataSource, TnvedSource, {provide: ErrorHandler, useClass: IonicErrorHandler }]
 })
