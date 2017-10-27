@@ -1,0 +1,198 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>ТНВЭД</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list [hidden]="isShowCodeData">
+        <ion-card *ngFor="let node of nodes" (click)="nodeOnClick(node)">
+            <ion-card-header>
+                {{node.kod}}
+            </ion-card-header>
+            <ion-card-content>
+                {{node.name}}
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
+    <ion-card [hidden]="!isShowCodeData">
+        <ion-card-header>
+            {{codeData?.code}}
+        </ion-card-header>
+        <ion-card-content>
+            {{codeData?.name}}
+        </ion-card-content>
+
+        <!--
+            'import_tax'
+            'export_tax'
+            'vat'
+            'excise'
+            'special'
+            'ensuring'
+        -->
+
+        <!--import_tax-->
+        <div [hidden]="!codeData?.data?.import_tax">
+            <ion-card-header>
+                {{codeData?.data?.import_tax?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.import_tax?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>            
+            </ion-card-content>
+        </div>
+                
+        <!--export_tax-->
+        <div [hidden]="!codeData?.data?.export_tax">
+            <ion-card-header>
+                {{codeData?.data?.export_tax?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.export_tax?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--vat-->
+        <div [hidden]="!codeData?.data?.vat">
+            <ion-card-header>
+                {{codeData?.data?.vat?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.vat?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+        
+        <!--excise-->
+        <div [hidden]="!codeData?.data?.excise">
+            <ion-card-header>
+                {{codeData?.data?.excise?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.excise?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--special-->
+        <div [hidden]="!codeData?.data?.special">
+            <ion-card-header>
+                {{codeData?.data?.special?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.special?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--ensuring-->
+        <div [hidden]="!codeData?.data?.ensuring">
+            <ion-card-header>
+                {{codeData?.data?.ensuring?.name}}
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row *ngFor="let row of codeData?.data?.ensuring?.data">
+                        <ion-col col-4>
+                            {{row.rate_string}}
+                        </ion-col>
+                        <ion-col>
+                            {{row.description}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </div>
+
+        <!--
+            *documents
+                restrictions
+                license
+                certificates
+                others        
+        -->
+        <div [hidden]="!codeData?.data?.documents">
+            <ion-card-header>
+                Документы, лиценции, сертификаты и т.п.
+            </ion-card-header>
+
+            <!---->
+            <div [hidden]="!codeData?.data?.documents?.restrictions">
+                <ion-card-header>
+                    {{codeData?.data?.documents?.restrictions?.name}}
+                </ion-card-header>
+                <ion-card-content>
+                    <ion-grid>
+                        <ion-row *ngFor="let row of codeData?.data?.documents?.restrictions?.data">
+                            <ion-col>
+                                {{row.description}}
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card-content>
+            </div>
+        </div>
+    </ion-card>
+</ion-content>
+
+<ion-footer [hidden]="!isShowFooter">
+    <ion-toolbar>
+        <ion-buttons start>
+            <button ion-button icon-start (click)="goTop()">
+                <ion-icon name="md-arrow-up"></ion-icon>
+                &nbsp;&nbsp;В начало
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button icon-start (click)="goBack()">
+                <ion-icon name="md-arrow-back"></ion-icon>
+                &nbsp;&nbsp;Назад
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

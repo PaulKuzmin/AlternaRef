@@ -1,0 +1,12 @@
+{
+  "name": "io.cordova.myapp48dc60",
+  "app_id": "",
+  "integrations": {},
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api/",
+      "proxyUrl": "https://alterna.ltd/"
+    }
+  ]
+}

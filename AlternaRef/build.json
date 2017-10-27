@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5"
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ],
+  "android": {
+    "release": {
+      "keystore": "c:\\Android\\my-release-key.keystore",
+      "storePassword": "123456",
+      "alias": "Bender",
+      "password": "123456",
+      "keystoreType": ""
+    }
+  }
+}
