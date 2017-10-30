@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Примеры декларирования</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Описание или код..."></ion-searchbar>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-card *ngFor="let item of items">
+            <ion-card-header>
+                {{item.code}}
+            </ion-card-header>
+            <ion-card-content [innerHtml]="item.name"></ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left small (click)="tnvedClick(item.code)">
+                        <ion-icon name="thumbs-up"></ion-icon>
+                        <div>ТНВЭД</div>
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left small>
+                        <ion-icon name="text"></ion-icon>
+                        <div>Калькулятор</div>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </ion-list>
+</ion-content>

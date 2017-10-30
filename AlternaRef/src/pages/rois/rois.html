@@ -6,7 +6,7 @@
         <ion-title>Реестр ОИС</ion-title>
     </ion-navbar>
     <ion-toolbar>
-        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Наименование..."></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 

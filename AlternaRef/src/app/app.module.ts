@@ -7,9 +7,11 @@ import { HomePage } from '../pages/home/home';
 import { RoisPage } from '../pages/rois/rois';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TnvCodePage } from "../pages/tnvcode/tnvcode";
+import { ExamplesPage } from "../pages/examples/examples";
 import { DataSource } from '../providers/datasource';
 import { TnvedSource } from '../providers/tnvedsource';
 import { OisSource } from '../providers/oissource';
+import { ExamplesSource } from '../providers/examplessource';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { OisSource } from '../providers/oissource';
     HomePage,
     RoisPage,
     TabsPage,
-    TnvCodePage
+    TnvCodePage,
+    ExamplesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -32,12 +35,14 @@ import { OisSource } from '../providers/oissource';
     HomePage,
     RoisPage,
     TabsPage,
-    TnvCodePage
+    TnvCodePage,
+    ExamplesPage
   ],
   providers: [
       DataSource,
       TnvedSource,
       OisSource,
+      ExamplesSource,
       { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

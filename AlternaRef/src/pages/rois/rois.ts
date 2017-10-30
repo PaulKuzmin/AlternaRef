@@ -39,20 +39,22 @@ export class RoisPage {
     }
 
     setFilteredItems() {
-        let loaderIndicator = this.loadingCtrl.create({
-            content: "Загрузка..."
-        });
-        loaderIndicator.present();
-        this.oisSource.getList(this.searchTerm).then(
-            data => {
-                console.log(data);
-                this.items = data.ois_list;
-                this.labels = data.ois_description;
-                loaderIndicator.dismiss();
-            },
-            error => {
-                console.error(error);
-                loaderIndicator.dismiss();
+        if (this.searchTerm.length > 0) {
+            let loaderIndicator = this.loadingCtrl.create({
+                content: "Загрузка..."
             });
+            loaderIndicator.present();
+            this.oisSource.getList(this.searchTerm).then(
+                data => {
+                    console.log(data);
+                    this.items = data.ois_list;
+                    this.labels = data.ois_description;
+                    loaderIndicator.dismiss();
+                },
+                error => {
+                    console.error(error);
+                    loaderIndicator.dismiss();
+                });
+        }
     }
 }

@@ -1,5 +1,8 @@
 <ion-header>
     <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-title>{{codeData?.code}}</ion-title>
     </ion-navbar>
 </ion-header>
@@ -212,3 +215,22 @@
         </div>
     </ion-card>
 </ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left (click)="examplesClick()">
+                    <ion-icon name="thumbs-up"></ion-icon>
+                    <div>Примеры</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button icon-left>
+                    <ion-icon name="text"></ion-icon>
+                    <div>Калькулятор</div>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

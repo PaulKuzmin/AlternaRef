@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { TnvedSource } from "../../providers/tnvedsource";
+import { ExamplesPage } from "../../pages/examples/examples";
 
 @Component({
     selector: 'page-tnvcode',
@@ -46,4 +47,9 @@ export class TnvCodePage {
             });
     }
 
+    examplesClick() {
+        this.navCtrl.push(ExamplesPage, {
+            text: this.code
+        });
+    }
 }

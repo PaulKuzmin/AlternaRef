@@ -9,7 +9,7 @@ export class DataSource {
     readonly endpoint = '/api/';
 
     constructor(public http: Http) {
-        console.log('Hello datasource Provider');
+        
     }
 
     getCurrent(url: string): Promise<any> {
