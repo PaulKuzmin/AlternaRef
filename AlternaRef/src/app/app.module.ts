@@ -9,6 +9,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TnvCodePage } from "../pages/tnvcode/tnvcode";
 import { DataSource } from '../providers/datasource';
 import { TnvedSource } from '../providers/tnvedsource';
+import { OisSource } from '../providers/oissource';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,11 @@ import { TnvedSource } from '../providers/tnvedsource';
     TabsPage,
     TnvCodePage
   ],
-  providers: [DataSource, TnvedSource, {provide: ErrorHandler, useClass: IonicErrorHandler }]
+  providers: [
+      DataSource,
+      TnvedSource,
+      OisSource,
+      { provide: ErrorHandler, useClass: IonicErrorHandler }
+  ]
 })
 export class AppModule {}

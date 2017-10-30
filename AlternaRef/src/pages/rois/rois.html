@@ -1,19 +1,105 @@
-<!--
-  Generated template for the NewPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
     <ion-navbar>
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>ROIS</ion-title>
+        <ion-title>Реестр ОИС</ion-title>
     </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
+<ion-content padding>    
+    <ion-list>
+        <ion-card *ngFor="let item of items">
+            <ion-card-header>
+                {{labels.regnom}}
+            </ion-card-header>
+            <ion-card-content>
+                {{item.regnom}}
+            </ion-card-content>
 
-<ion-content padding>
+            <ion-card-header *ngIf="item.g31_12">
+                {{labels.g31_12}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.g31_12">
+                {{item.g31_12}}
+            </ion-card-content>
 
+            <ion-card-header *ngIf="item.note">
+                {{labels.note}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.note">
+                {{item.note}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.document">
+                {{labels.document}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.document">
+                {{item.document}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.name">
+                {{labels.name}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.name">
+                {{item.name}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.namet">
+                {{labels.namet}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.namet">
+                {{item.namet}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.agent">
+                {{labels.agent}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.agent">
+                {{item.agent}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.mktu">
+                {{labels.mktu}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.mktu">
+                {{item.mktu}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.dateend">
+                {{labels.dateend}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.dateend">
+                {{item.dateend}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.comm">
+                {{labels.comm}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.comm">
+                {{item.comm}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.letter">
+                {{labels.letter}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.letter">
+                {{item.letter}}
+            </ion-card-content>
+
+            <ion-card-header *ngIf="item.g33">
+                {{labels.g33}}
+            </ion-card-header>
+            <ion-card-content *ngIf="item.g33">
+                {{item.g33}}
+            </ion-card-content>
+
+            <ion-card-content *ngIf="item.image">
+                <ion-img src="https://alterna.ltd/img/ois/{{item.image}}" [width]="150" [height]="150" no-padding no-margin></ion-img>
+            </ion-card-content>
+        </ion-card>
+    </ion-list>
 </ion-content>
