@@ -1,0 +1,91 @@
+<ion-header>
+    <ion-navbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Расчет {{data?.chosen?.code}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-segment [(ngModel)]="calcCurrs" (ionChange)="onChangeCalcCurrs()">
+        <ion-segment-button value="rubles">
+            В рублях
+        </ion-segment-button>
+        <ion-segment-button value="dollars">
+            В дол.США
+        </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="calcCurrs">
+        <ion-card>
+            <ion-card-header>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            Итого
+                        </ion-col>
+                        <ion-col text-right *ngSwitchCase="'rubles'">
+                            {{data.calculation.payments_summa_rub | number:'3.2-2'}}
+                        </ion-col>
+                        <ion-col text-right *ngSwitchCase="'dollars'">
+                            {{data.calculation.payments_summa_usd | number:'3.2-2'}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-header>
+            <ion-card-content>
+                <ion-list>
+                    <div *ngFor="let p of data.calculation.payments">
+                        <ion-list-header>
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col>
+                                        {{p.name}}
+                                    </ion-col>
+                                    <ion-col text-right *ngSwitchCase="'rubles'">
+                                        {{p.summa_rub | number:'3.2-2'}}
+                                    </ion-col>
+                                    <ion-col text-right *ngSwitchCase="'dollars'">
+                                        {{p.summa_usd | number:'3.2-2'}}
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </ion-list-header>
+                        <ion-item>
+                            {{p.rate}}
+                        </ion-item>
+                    </div>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </div>
+
+    <ion-card>
+        <ion-card-header>
+            Курсы валют
+        </ion-card-header>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row *ngFor="let c of currencies">
+                    <ion-col>
+                        {{c.name}}
+                    </ion-col>
+                    <ion-col text-right>
+                        {{c.value}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar>
+        <button block ion-button icon-left (click)="requestClick()">
+            <ion-icon name="thumbs-up"></ion-icon>
+            Отправить запрос
+        </button>
+    </ion-toolbar>
+</ion-footer>

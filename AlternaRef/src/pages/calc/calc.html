@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card>
+    <ion-card *ngIf="!isShowCalc">
         <ion-card-content center text-center>
             <p>Не нашли или не знаете код - воспользуйтесь справочником</p>
             <button ion-button (click)="tnvedClick()">ТНВЭД ТС</button>
@@ -20,23 +20,80 @@
         </ion-card-content>
     </ion-card>
 
-    <ion-card>
-        <ion-item>
-            <ion-label stacked>Направление перемещения</ion-label>
-            <ion-select class="max-width" [(ngModel)]="direction" cancelText="Отмена" interface="action-sheet">
-                <ion-option value="I">Импорт</ion-option>
-                <ion-option value="E">Экспорт</ion-option>
-            </ion-select>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>Страна</ion-label>
-            <ion-select class="max-width" [(ngModel)]="country" interface="alert" cancelText="Отмена" [selectOptions]="countrySelectOptions">
-                <ion-option *ngFor="let c of params?.data?.countries" [value]="c.code">{{c.name}}</ion-option>
-            </ion-select>
-        </ion-item>
-        <ion-item>
-            <ion-label stacked>Стоимость, дол. США</ion-label>
-            <ion-input [(ngModel)]="param_cost" type="number" min="0"></ion-input>
-        </ion-item>
-    </ion-card>
+    <div *ngIf="isShowCalc" style="padding-bottom: 50px;">
+        <ion-card>
+            <ion-item>
+                <ion-label stacked>Направление перемещения</ion-label>
+                <ion-select class="max-width" [(ngModel)]="chosenParams.direction" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">
+                    <ion-option value="I">Импорт</ion-option>
+                    <ion-option value="E">Экспорт</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Страна</ion-label>
+                <ion-select class="max-width" [(ngModel)]="chosenParams.country" interface="alert" cancelText="Отмена" [selectOptions]="countrySelectOptions" (ionChange)="setFilteredItems()">
+                    <ion-option *ngFor="let c of params?.data?.countries" [value]="c.code">{{c.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                <ion-label stacked>Стоимость, дол. США</ion-label>
+                <ion-input [(ngModel)]="chosenParams.param_cost" type="number" min="0"></ion-input>
+            </ion-item>
+            <!--variable-->
+            <ion-item *ngFor="let p of calcParams">
+                <ion-label stacked>{{p.description}}</ion-label>
+                <ion-input [(ngModel)]="chosenParams[p.code]" type="number" min="0"></ion-input>
+            </ion-item>
+            <!--special-->
+            <ion-item *ngFor="let sp of specialParams">
+                <ion-label stacked>{{sp.type_name}}</ion-label>
+                <ion-select class="max-width" [(ngModel)]="chosenParams[sp.type]" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">
+                    <ion-option *ngFor="let spd of sp?.data" [value]="spd.id">{{spd.name}}</ion-option>
+                </ion-select>
+            </ion-item>
+        </ion-card>
+        <ion-card>
+            <ion-card-header>
+                Среднеконтрактные цены, дол. США/кг
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            Минимум
+                        </ion-col>
+                        <ion-col text-right>
+                            {{statsPrice?.minimum}}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            Средняя
+                        </ion-col>
+                        <ion-col text-right>
+                            {{statsPrice?.average}}
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            Максимум
+                        </ion-col>
+                        <ion-col text-right>
+                            {{statsPrice?.maximum}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <p>Данные за период</p>
+            </ion-card-content>
+        </ion-card>
+    </div>
 </ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar *ngIf="isShowCalc">
+        <button block ion-button icon-left (click)="calcClick()">
+            <ion-icon name="thumbs-up"></ion-icon>
+            Рассчитать
+        </button>
+    </ion-toolbar>
+</ion-footer>

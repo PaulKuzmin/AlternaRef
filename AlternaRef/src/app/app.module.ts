@@ -8,6 +8,7 @@ import { RoisPage } from '../pages/rois/rois';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TnvCodePage } from "../pages/tnvcode/tnvcode";
 import { ExamplesPage } from "../pages/examples/examples";
+import { CalcResultPage } from "../pages/calcresult/calcresult";
 import { DataSource } from '../providers/datasource';
 import { TnvedSource } from '../providers/tnvedsource';
 import { OisSource } from '../providers/oissource';
@@ -23,7 +24,8 @@ import { CalcSource } from '../providers/calcsource';
     RoisPage,
     TabsPage,
     TnvCodePage,
-    ExamplesPage
+    ExamplesPage,
+    CalcResultPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -37,7 +39,8 @@ import { CalcSource } from '../providers/calcsource';
     RoisPage,
     TabsPage,
     TnvCodePage,
-    ExamplesPage
+    ExamplesPage,
+    CalcResultPage
   ],
   providers: [
       DataSource,

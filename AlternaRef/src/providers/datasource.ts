@@ -13,7 +13,12 @@ export class DataSource {
     }
 
     getCurrent(url: string): Promise<any> {
-        let requestUrl = this.endpoint + url + '?json=true';
+        let requestUrl = this.endpoint + url;
+        if (requestUrl.indexOf("?")>-1) {
+            requestUrl += '&json=true';
+        } else {
+            requestUrl += '?json=true';
+        }
         console.log(requestUrl);
         return this.http.get(requestUrl)
             .toPromise()

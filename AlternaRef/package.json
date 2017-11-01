@@ -24,6 +24,7 @@
     "ionic-angular": "2.0.1",
     "ionic-native": "2.4.1",
     "ionicons": "3.0.0",
+    "ng-dynamic": "^3.0.2",
     "rxjs": "5.0.0-beta.12",
     "sw-toolbox": "3.4.0",
     "zone.js": "0.6.26"
@@ -43,6 +44,8 @@
   ],
   "cordovaPlatforms": [],
   "-vs-binding": {
-    "BeforeBuild": [ "ionic:build" ]
+    "BeforeBuild": [
+      "ionic:build"
+    ]
   }
 }
