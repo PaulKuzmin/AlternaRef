@@ -22216,6 +22216,10 @@ sub {
   }
 }
 
+.max-width {
+  max-width: 100%;
+}
+
 page-home .center {
   text-align: center;
 }

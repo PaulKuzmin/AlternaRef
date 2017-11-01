@@ -12,6 +12,7 @@ import { DataSource } from '../providers/datasource';
 import { TnvedSource } from '../providers/tnvedsource';
 import { OisSource } from '../providers/oissource';
 import { ExamplesSource } from '../providers/examplessource';
+import { CalcSource } from '../providers/calcsource';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ExamplesSource } from '../providers/examplessource';
       TnvedSource,
       OisSource,
       ExamplesSource,
+      CalcSource,
       { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
