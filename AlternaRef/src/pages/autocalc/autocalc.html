@@ -8,15 +8,59 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
-    <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
-    </ion-item>
-    <ion-item>
-      <ion-icon name="cafe" item-left></ion-icon>
-      @VSCordovaTools
-    </ion-item>
-  </ion-list>
+    <ion-card>
+        <ion-item>
+            <ion-label stacked>Тип авто</ion-label>
+            <ion-select class="max-width" [(ngModel)]="chosenParams.vehicle" cancelText="Отмена" interface="action-sheet" (ionChange)="getParams()">
+                <ion-option value="car">ЛЕГКОВОЙ</ion-option>
+                <ion-option value="cargo">ГРУЗОВОЙ</ion-option>
+                <ion-option value="bus">АВТОБУС</ion-option>
+                <ion-option value="bike">МОТОЦИКЛ/МОПЕД</ion-option>
+                <ion-option value="tractor">ТЯГАЧ</ion-option>
+                <ion-option value="crane">АВТОКРАН</ion-option>
+                <ion-option value="quadrocicle">КВАДРОЦИКЛ</ion-option>
+                <ion-option value="concretemixer">БЕТОНОМЕШАЛКА</ion-option>
+                <ion-option value="driving">АВТОБУРОВАЯ</ion-option>
+                <ion-option value="evacuator">ЭВАКУАТОР</ion-option>
+                <ion-option value="concretepump">БЕТОНОНАСОС</ion-option>
+                <ion-option value="snowmobile">СНЕГОХОД</ion-option>
+                <ion-option value="caravan">АВТОПРИЦЕП</ion-option>
+                <ion-option value="house">ДОМ-АВТОПРИЦЕП</ion-option>
+                <ion-option value="waterbike">ВОДНЫЙ МОТОЦИКЛ</ion-option>
+                <ion-option value="boat">КАТЕР (ЯХТА,ЛОДКА)</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Месяц выпуска</ion-label>
+            <ion-select class="max-width" [(ngModel)]="chosenParams.month" cancelText="Отмена" interface="action-sheet">
+                <ion-option *ngFor="let m of months" [value]="m.id">{{m.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Год выпуска</ion-label>
+            <ion-select class="max-width" [(ngModel)]="chosenParams.year" cancelText="Отмена" interface="action-sheet">
+                <ion-option *ngFor="let y of years" [value]="y">{{y}}</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Стоимость</ion-label>
+            <ion-input [(ngModel)]="chosenParams.cost" placeholder="дол. США" min="0"></ion-input>
+        </ion-item>
+        <ion-item *ngFor="let p of calcParams?.calc_params">
+            <ion-label stacked>{{p.name}}</ion-label>
+            <ion-select class="max-width" *ngIf="p.code=='engine'" [(ngModel)]="chosenParams[p.code]" cancelText="Отмена" interface="action-sheet">
+                <ion-option *ngFor="let e of calcParams?.calc_engines" [value]="e.id">{{e.name}}</ion-option>
+            </ion-select>
+            <ion-input *ngIf="p.code!='engine'" [(ngModel)]="chosenParams[p.code]" [placeholder]="p.dimension" min="0"></ion-input>
+        </ion-item>
+    </ion-card>
 </ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar>
+        <button block ion-button icon-left (click)="calcClick()">
+            <ion-icon name="thumbs-up"></ion-icon>
+            Рассчитать
+        </button>
+    </ion-toolbar>
+</ion-footer>
