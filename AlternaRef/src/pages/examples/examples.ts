@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { LoadingController } from 'ionic-angular';
 import 'rxjs/add/operator/debounceTime';
 import { TnvCodePage } from "../../pages/tnvcode/tnvcode";
+import { CalcPage } from "../../pages/calc/calc";
 
 @Component({
     selector: 'page-examples',
@@ -66,6 +67,12 @@ export class ExamplesPage {
 
     tnvedClick(code: string) {
         this.navCtrl.push(TnvCodePage, {
+            code: code
+        });
+    }
+
+    calcClick(code: string) {
+        this.navCtrl.push(CalcPage, {
             code: code
         });
     }

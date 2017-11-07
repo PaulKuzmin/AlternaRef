@@ -23,11 +23,7 @@ export class CalcResultPage {
     }
 
     ionViewDidLoad() {
-        console.log(this.currencies);
-    }
-
-    onChangeCalcCurrs() {
-        console.log(this.calcCurrs);
+        //console.log(this.currencies);
     }
 
     requestClick() {

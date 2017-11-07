@@ -19,6 +19,8 @@ import { ExamplesSource } from '../providers/examplessource';
 import { CalcSource } from '../providers/calcsource';
 import { AutoCalcSource } from '../providers/autocalcsource';
 import { RequestPage } from "../pages/request/request";
+import { AboutPage } from "../pages/about/about";
+import { MailSource } from '../providers/mailsource';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -35,7 +37,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ExamplesPage,
     CalcResultPage,
     AutoCalcResultPage,
-    RequestPage
+    RequestPage,
+    AboutPage    
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ExamplesPage,
     CalcResultPage,
     AutoCalcResultPage,
-    RequestPage
+    RequestPage,
+    AboutPage
   ],
   providers: [
       StatusBar,
@@ -65,6 +69,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
       ExamplesSource,
       CalcSource,
       AutoCalcSource,
+      MailSource,
       { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
