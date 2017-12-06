@@ -1,0 +1,19 @@
+<accordion [title]="data?.name" [hidden]="!data">
+    <ion-grid>
+        <ion-row *ngFor="let row of data?.data">
+            <ion-col col-12>
+                <span *ngIf="row.direction=='I'"><b>Импорт</b> - </span>
+                <span *ngIf="row.direction=='E'"><b>Экспорт</b> - </span>
+                <span *ngIf="row.document">{{row.document}} </span>
+                {{row.description}}
+                <span *ngIf="row.authority || row.authority_license">
+                    //
+                    <b> Орган:</b>
+                    <span *ngIf="row.authority"> {{row.authority}}</span>
+                    <span *ngIf="row.authority_license"> {{row.authority_license}}</span>
+                </span>
+                <span *ngIf="row.order"> //<b> Основание: </b>{{row.order}}</span>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</accordion>

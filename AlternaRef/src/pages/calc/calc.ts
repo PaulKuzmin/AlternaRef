@@ -13,7 +13,7 @@ import { CalcResultPage } from "../../pages/calcresult/calcresult";
 })
 export class CalcPage {
 
-    searchTerm: string = '3822000000';
+    searchTerm: string = '';//'3822000000';
     searchControl: FormControl;
     searching: any = false;
     params: any;
@@ -24,6 +24,7 @@ export class CalcPage {
         enableBackdropDismiss: true
     };
     isShowCalc: boolean = false;
+    isShowHint: boolean = false;
 
     chosenParams: any = {
         direction: "I",
@@ -49,6 +50,7 @@ export class CalcPage {
     }
 
     ionViewDidLoad() {
+        this.isShowHint = !this.searchTerm.trim();
         this.setFilteredItems();
         this.searchControl.valueChanges.debounceTime(1000).subscribe(search => {
             this.searching = false;
@@ -78,10 +80,17 @@ export class CalcPage {
                 content: "Загрузка..."
             });
             loaderIndicator.present();
-            this.calcSource.getParams(this.searchTerm, this.chosenParams).then(
+
+            this.calcSource.getParams(this.searchTerm.replace(' ', '_'), this.chosenParams).then(
                 data => {
                     console.log(data);
                     this.params = data;
+
+                    if (!data.success || data.data.calc_info.length == 0) {
+                        this.isShowHint = true;
+                        loaderIndicator.dismiss();
+                        return;
+                    }
 
                     // special
                     this.specialParams = [];
@@ -121,7 +130,8 @@ export class CalcPage {
                     //console.log(this.calcParams);
                     //console.log(this.chosenParams);
 
-                    this.isShowCalc = true;
+                    this.isShowHint = false;
+                    this.isShowCalc = true;                    
 
                     this.getStatsPrice(data.data.tnved_code);
 
@@ -131,6 +141,8 @@ export class CalcPage {
                     console.error(error);
                     loaderIndicator.dismiss();
                 });
+        } else {
+            this.isShowHint = true;
         }
     }
 

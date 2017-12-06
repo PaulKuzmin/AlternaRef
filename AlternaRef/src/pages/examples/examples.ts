@@ -18,6 +18,9 @@ export class ExamplesPage {
     items: any;
     searching: any = false;
 
+    isShowHint: boolean = true;
+    isShowNotFound: boolean = false;
+
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -55,6 +58,14 @@ export class ExamplesPage {
             this.examplesSource.getList(this.searchTerm).then(
                 data => {
                     console.log(data);
+                    this.isShowHint = false;
+                    if (!data.success || data.data.data.length == 0) {
+                        this.isShowNotFound = true;
+                        this.items = null;
+                        loaderIndicator.dismiss();
+                        return;
+                    }
+
                     this.items = data.data.data;
                     loaderIndicator.dismiss();
                 },
@@ -62,7 +73,13 @@ export class ExamplesPage {
                     console.error(error);
                     loaderIndicator.dismiss();
                 });
+        } else {
+            this.isShowHint = true;
+            this.items = null;
+            this.isShowNotFound = false;
         }
+
+        console.log(this.isShowHint);
     }
 
     tnvedClick(code: string) {
@@ -75,5 +92,9 @@ export class ExamplesPage {
         this.navCtrl.push(CalcPage, {
             code: code
         });
+    }
+
+    goClick() {
+        this.navCtrl.parent.select(0);
     }
 }

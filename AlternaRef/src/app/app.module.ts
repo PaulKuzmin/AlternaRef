@@ -25,6 +25,11 @@ import { MailSource } from '../providers/mailsource';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AccordionComponent } from "../components/accordion/accordion";
+import { RateComponent } from "../components/rate/rate";
+import { DocumentComponent } from "../components/document/document";
+import { IonCardContentCollapsableComponent } from "../components/ion-card-content-collapsable/ion-card-content-collapsable";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -38,7 +43,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CalcResultPage,
     AutoCalcResultPage,
     RequestPage,
-    AboutPage    
+    AboutPage,
+    AccordionComponent,
+    RateComponent,
+    DocumentComponent,
+    IonCardContentCollapsableComponent
   ],
   imports: [
     BrowserModule,

@@ -11,22 +11,35 @@
 </ion-header>
 
 <ion-content padding>
+
+    <ion-card *ngIf="isShowHint">
+        <ion-card-content center text-center>
+            <p>Подберите код ТНВЭД ТС по описанию товара</p>
+            <p>или можете посмотреть описание товара по коду ТНВЭД ТС.</p>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="isShowNotFound">
+        <ion-card-content center text-center>
+            <p>По вашему запросу ничего не найдено!</p>
+            <p>Воспользуйтесь справочником</p>
+            <button ion-button (click)="goClick()">ТНВЭД ТС</button>
+        </ion-card-content>
+    </ion-card>
+
     <ion-list>
         <ion-card *ngFor="let item of items">
-            <ion-card-header>
-                {{item.code}}
-            </ion-card-header>
-            <ion-card-content [innerHtml]="item.name"></ion-card-content>
+            <ion-card-content-collapsable [data]="item"></ion-card-content-collapsable>
             <ion-row>
                 <ion-col>
-                    <button ion-button icon-left small (click)="tnvedClick(item.code)">
-                        <ion-icon name="thumbs-up"></ion-icon>
+                    <button ion-button full icon-left small (click)="tnvedClick(item.code)">
+                        <ion-icon name="list"></ion-icon>
                         <div>ТНВЭД</div>
                     </button>
                 </ion-col>
                 <ion-col>
-                    <button ion-button icon-left small (click)="calcClick(item.code)">
-                        <ion-icon name="text"></ion-icon>
+                    <button ion-button full icon-left small (click)="calcClick(item.code)">
+                        <ion-icon name="cube"></ion-icon>
                         <div>Калькулятор</div>
                     </button>
                 </ion-col>

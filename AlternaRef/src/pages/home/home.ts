@@ -32,8 +32,14 @@ export class HomePage {
 
     nodeOnClick(node: any) {
         if (node.has_childs == 0) {
+
+            let code = node.kod;
+            if (node.kodplus) {
+                code += '_' + node.kodplus;
+            }
+
             this.navCtrl.push(TnvCodePage, {
-                code: node.kod
+                code: code
             });
         } else {
             this.navCtrl.push(HomePage, {
@@ -42,9 +48,11 @@ export class HomePage {
         }
     }
 
+    /*
     goTop() {
         this.loadNode(0);
     }
+    */
 
     loadNode(id: number) {
         this.loaderIndicator = this.loadingCtrl.create({

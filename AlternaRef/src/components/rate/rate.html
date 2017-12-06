@@ -1,0 +1,20 @@
+<ion-card [hidden]="!data">
+    <ion-card-header>
+        {{data?.name}}
+    </ion-card-header>
+    <ion-card-content>
+        <ion-grid *ngFor="let row of data?.data">
+            <ion-row>
+                <ion-col col-12 class="alt-rate">
+                    <b>{{row.rate_string}}</b>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-12>
+                    <span *ngIf="!row.description">Базовая ставка</span>
+                    {{row.description}}
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card-content>
+</ion-card>

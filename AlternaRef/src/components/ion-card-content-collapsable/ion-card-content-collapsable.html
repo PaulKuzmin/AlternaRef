@@ -1,0 +1,11 @@
+<ion-card-header (click)="toggleContent()">
+    <ion-row justify-content-around>
+        <ion-col col-11>
+            <span item-left>{{data.code}}</span>
+        </ion-col>
+        <ion-col col-1>
+            <span item-right><ion-icon [name]="icon"></ion-icon></span>
+        </ion-col>
+    </ion-row>    
+</ion-card-header>
+<ion-card-content [innerHtml]="data.name" #cc (click)="toggleContent()"></ion-card-content>

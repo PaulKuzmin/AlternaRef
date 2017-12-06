@@ -6,16 +6,16 @@
         <ion-title>Калькулятор</ion-title>
     </ion-navbar>
     <ion-toolbar>
-        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Описание или код..."></ion-searchbar>
+        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Код ТНВЭД ТС..."></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-card *ngIf="!isShowCalc">
+    <ion-card *ngIf="isShowHint">
         <ion-card-content center text-center>
             <p>Не нашли или не знаете код - воспользуйтесь справочником</p>
             <button ion-button (click)="tnvedClick()">ТНВЭД ТС</button>
-            <p>или подобрать код по </p>
+            <p>или подберите код по </p>
             <button ion-button (click)="examplesClick()">Примеры декларирования</button>
         </ion-card-content>
     </ion-card>

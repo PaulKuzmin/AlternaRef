@@ -49,8 +49,12 @@ export class TnvCodePage {
     }
 
     examplesClick() {
+        let searchCode = this.code;
+        if (searchCode.indexOf('_')) {
+            searchCode = searchCode.substr(0, searchCode.indexOf('_'));
+        }
         this.navCtrl.push(ExamplesPage, {
-            text: this.code
+            text: searchCode
         });
     }
 

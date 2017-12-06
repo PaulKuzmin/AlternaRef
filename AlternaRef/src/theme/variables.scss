@@ -23,13 +23,7 @@ $font-path: "../assets/fonts";
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$colors: (
-  primary:    #387ef5,
-  secondary:  #32db64,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
-);
+
 
 
 // App iOS Variables
@@ -60,8 +54,42 @@ $colors: (
 // so that the above variables are used and Ionic's
 // default are overridden.
 
-@import "ionic.theme.default";
+$colors: ( primary: #ff8b00, secondary: #32db64, danger: #f53d3d, light: #f4f4f4, dark: #222, ) !default;
 
+
+$text-color:                 #000 !default;
+$link-color:                 color($colors, primary) !default;
+$background-color:           #f0eff5 !default; // +
+$subdued-text-color:         #666 !default;
+
+$font-family-base:           -apple-system, "Helvetica Neue", "Roboto", sans-serif !default;
+$font-size-base:             1.6rem !default; // 1.4rem == 14px
+
+$content-padding:            0px !default;
+$content-margin:             16px !default;
+
+$toolbar-background:         #fff !default;
+$toolbar-border-color:       #e4e4e4 !default;
+$toolbar-text-color:         $text-color !default;
+
+$toolbar-md-text-color:      $text-color !default;
+
+$toolbar-active-color:       $link-color !default;
+$toolbar-inactive-color:     #8c8c8c !default;
+
+$tabs-background:            #fff !default;
+$tabs-border-color:          #e4e4e4 !default;
+$tabs-tab-color-inactive:    #000 !default;
+$tabs-tab-color-active:      $link-color !default;
+
+$list-text-color:            $text-color !default;
+$list-background-color:      #fff !default; // +
+$list-border-color:          #e4e4e4 !default;
+
+// Color for android tabs
+$tabs-md-tab-color-inactive: $text-color !default;
+$tabs-md-tab-text-color: $text-color !default;
+$tabs-md-tab-icon-color: $text-color !default;
 
 // Ionicons
 // --------------------------------------------------
@@ -76,3 +104,9 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+/*
+.tabs-md .tab-button-icon {
+    color: red !important;
+}
+*/

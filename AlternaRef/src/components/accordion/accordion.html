@@ -1,0 +1,15 @@
+<ion-card>
+    <ion-card-header (click)="toggleAccordion()">        
+        <ion-row justify-content-around>
+            <ion-col col-11>
+                <span item-left>{{ title }}</span>
+            </ion-col>
+            <ion-col col-1>
+                <span item-right><ion-icon [name]="icon"></ion-icon></span>
+            </ion-col>
+        </ion-row>
+    </ion-card-header>
+    <ion-card-content #cc>
+        <ng-content></ng-content>
+    </ion-card-content>
+</ion-card>

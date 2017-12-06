@@ -11,7 +11,16 @@
     <ion-list>
         <ion-card *ngFor="let node of nodes" (click)="nodeOnClick(node)">
             <ion-card-header>
-                {{node.kod}}
+
+                <ion-row justify-content-around>
+                    <ion-col col-11>
+                        <span item-left>{{node.kod}} {{node.kodplus}}</span>
+                    </ion-col>
+                    <ion-col col-1>
+                        <span item-right><ion-icon name="arrow-forward"></ion-icon></span>
+                    </ion-col>
+                </ion-row>
+                    
             </ion-card-header>
             <ion-card-content>
                 {{node.name}}
@@ -20,13 +29,19 @@
     </ion-list>
 </ion-content>
 
+<!--
 <ion-footer [hidden]="!isShowFooter">
     <ion-toolbar>
-        <ion-buttons start>
-            <button ion-button icon-start (click)="goTop()">
-                <ion-icon name="md-arrow-up"></ion-icon>
-                &nbsp;&nbsp;В начало
-            </button>
-        </ion-buttons>
+        <ion-row>
+            <ion-col>
+            </ion-col>
+            <ion-col>
+                <button ion-button full outline icon-left (click)="goTop()">
+                    <ion-icon name="md-arrow-up"></ion-icon>
+                    <div>В начало</div>
+                </button>
+            </ion-col>
+        </ion-row>
     </ion-toolbar>
 </ion-footer>
+-->
