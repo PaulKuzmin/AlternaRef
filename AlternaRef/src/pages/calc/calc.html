@@ -21,7 +21,17 @@
     </ion-card>
 
     <div *ngIf="isShowCalc" style="padding-bottom: 50px;">
+        
+        <ion-grid class="alt-title">
+            <ion-row>
+                <ion-col col-12><h5>{{params?.data?.calc_info?.name}}</h5></ion-col>
+            </ion-row>
+        </ion-grid>
+
         <ion-card>
+            <ion-card-header>
+                Параметры расчета
+            </ion-card-header>
             <ion-item>
                 <ion-label stacked>Направление перемещения</ion-label>
                 <ion-select class="max-width" [(ngModel)]="chosenParams.direction" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">
@@ -31,18 +41,18 @@
             </ion-item>
             <ion-item>
                 <ion-label stacked>Страна</ion-label>
-                <ion-select class="max-width" [(ngModel)]="chosenParams.country" interface="alert" cancelText="Отмена" [selectOptions]="countrySelectOptions" (ionChange)="setFilteredItems()">
+                <ion-select class="max-width" [(ngModel)]="chosenParams.country" interface="alert" cancelText="Отмена" [selectOptions]="countrySelectOptions" (ionChange)="setFilteredItems()" (ionFocus)="checkFocus()">
                     <ion-option *ngFor="let c of params?.data?.countries" [value]="c.code">{{c.name}}</ion-option>
                 </ion-select>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Стоимость, дол. США</ion-label>
-                <ion-input [(ngModel)]="chosenParams.param_cost" type="number" min="0"></ion-input>
+                <ion-input [(ngModel)]="chosenParams.param_cost" type="tel" min="0"></ion-input>
             </ion-item>
             <!--variable-->
             <ion-item *ngFor="let p of calcParams">
-                <ion-label stacked>{{p.description}}</ion-label>
-                <ion-input [(ngModel)]="chosenParams[p.code]" type="number" min="0"></ion-input>
+                <ion-label stacked>{{p.name}}<span *ngIf="p.dimension">, {{p.dimension}}</span></ion-label>
+                <ion-input [(ngModel)]="chosenParams[p.code]" type="tel" min="0"></ion-input>
             </ion-item>
             <!--special-->
             <ion-item *ngFor="let sp of specialParams">
@@ -52,10 +62,14 @@
                 </ion-select>
             </ion-item>
         </ion-card>
-        <ion-card>
-            <ion-card-header>
-                Среднеконтрактные цены, дол. США/кг
-            </ion-card-header>
+
+        <ion-grid class="alt-title" *ngIf="statsPrice">
+            <ion-row>
+                <ion-col col-12>Среднеконтрактные цены, $/кг</ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-card *ngIf="statsPrice">
             <ion-card-content>
                 <ion-grid>
                     <ion-row>
@@ -83,7 +97,7 @@
                         </ion-col>
                     </ion-row>
                 </ion-grid>
-                <p>Данные за период</p>
+                <p class="alt-hint">* Данные за полгода</p>
             </ion-card-content>
         </ion-card>
     </div>
@@ -92,7 +106,7 @@
 <ion-footer no-border>
     <ion-toolbar *ngIf="isShowCalc">
         <button block ion-button icon-left (click)="calcClick()">
-            <ion-icon name="thumbs-up"></ion-icon>
+            <ion-icon name="calculator"></ion-icon>
             Рассчитать
         </button>
     </ion-toolbar>

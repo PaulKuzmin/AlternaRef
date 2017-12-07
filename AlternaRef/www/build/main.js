@@ -111,8 +111,13 @@ var TnvCodePage = (function () {
         });
     };
     TnvCodePage.prototype.examplesClick = function () {
+        var searchCode = this.code;
+        if (searchCode.indexOf('_') > 8) {
+            searchCode = searchCode.substr(0, searchCode.indexOf('_'));
+        }
+        console.log(searchCode);
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_examples_examples__["a" /* ExamplesPage */], {
-            text: this.code
+            text: searchCode
         });
     };
     TnvCodePage.prototype.calcClick = function () {
@@ -124,12 +129,10 @@ var TnvCodePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-tnvcode',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\tnvcode\tnvcode.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>{{codeData?.code}}</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n    <ion-grid class="alt-title">\n\n        <ion-row>\n\n            <ion-col col-12><h5>{{codeData?.name}}</h5></ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n    <rate [data]="codeData?.data?.import_tax"></rate>\n\n    <rate [data]="codeData?.data?.export_tax"></rate>\n\n    <rate [data]="codeData?.data?.vat"></rate>\n\n    <rate [data]="codeData?.data?.excise"></rate>\n\n    <rate [data]="codeData?.data?.special"></rate>\n\n    <rate [data]="codeData?.data?.ensuring"></rate>\n\n\n\n    <ion-grid class="alt-title" [hidden]="!codeData?.data?.documents">\n\n        <ion-row>\n\n            <ion-col col-12>Документы и особенности</ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n    <document [data]="codeData?.data?.documents?.restrictions"></document>\n\n    <document [data]="codeData?.data?.documents?.license"></document>\n\n    <document [data]="codeData?.data?.documents?.certificates"></document>\n\n    <document [data]="codeData?.data?.documents?.others"></document>\n\n\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button full icon-left (click)="examplesClick()">\n\n                    <ion-icon name="paper"></ion-icon>\n\n                    <div>Примеры</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button full icon-left (click)="calcClick()">\n\n                    <ion-icon name="cube"></ion-icon>\n\n                    <div>Калькулятор</div>\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-toolbar>\n\n</ion-footer>'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\tnvcode\tnvcode.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */]) === "function" && _d || Object])
     ], TnvCodePage);
     return TnvCodePage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=tnvcode.js.map
@@ -174,6 +177,8 @@ var ExamplesPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.searchTerm = '';
         this.searching = false;
+        this.isShowHint = true;
+        this.isShowNotFound = false;
         this.searchControl = new __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormControl */]();
         var text = this.navParams.get("text");
         if (text) {
@@ -201,6 +206,13 @@ var ExamplesPage = (function () {
             loaderIndicator_1.present();
             this.examplesSource.getList(this.searchTerm).then(function (data) {
                 console.log(data);
+                _this.isShowHint = false;
+                if (!data.success || data.data.data.length == 0) {
+                    _this.isShowNotFound = true;
+                    _this.items = null;
+                    loaderIndicator_1.dismiss();
+                    return;
+                }
                 _this.items = data.data.data;
                 loaderIndicator_1.dismiss();
             }, function (error) {
@@ -208,6 +220,12 @@ var ExamplesPage = (function () {
                 loaderIndicator_1.dismiss();
             });
         }
+        else {
+            this.isShowHint = true;
+            this.items = null;
+            this.isShowNotFound = false;
+        }
+        console.log(this.isShowHint);
     };
     ExamplesPage.prototype.tnvedClick = function (code) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__pages_tnvcode_tnvcode__["a" /* TnvCodePage */], {
@@ -218,6 +236,9 @@ var ExamplesPage = (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_6__pages_calc_calc__["a" /* CalcPage */], {
             code: code
         });
+    };
+    ExamplesPage.prototype.goClick = function () {
+        this.navCtrl.parent.select(0);
     };
     ExamplesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -552,9 +573,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var CalcResultPage = (function () {
-    function CalcResultPage(navCtrl, navParams) {
+    function CalcResultPage(navCtrl, navParams, alertCtrl) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.alertCtrl = alertCtrl;
         this.currencies = [];
         this.calcCurrs = "rubles";
         this.data = this.navParams.get("data");
@@ -565,16 +587,24 @@ var CalcResultPage = (function () {
     CalcResultPage.prototype.ionViewDidLoad = function () {
         //console.log(this.currencies);
     };
+    CalcResultPage.prototype.showRateHint = function (taxName, rate) {
+        var alert = this.alertCtrl.create({
+            title: taxName,
+            subTitle: 'Ставка: ' + rate,
+            buttons: ['OK']
+        });
+        alert.present();
+    };
     CalcResultPage.prototype.requestClick = function () {
     };
     CalcResultPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-calcresult',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calcresult\calcresult.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Расчет {{data?.chosen?.code}}</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-segment [(ngModel)]="calcCurrs">\n\n        <ion-segment-button value="rubles">\n\n            В рублях\n\n        </ion-segment-button>\n\n        <ion-segment-button value="dollars">\n\n            В дол.США\n\n        </ion-segment-button>\n\n    </ion-segment>\n\n\n\n    <div [ngSwitch]="calcCurrs">\n\n        <ion-card>\n\n            <ion-card-header>\n\n                <ion-grid>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Итого\n\n                        </ion-col>\n\n                        <ion-col text-right *ngSwitchCase="\'rubles\'">\n\n                            {{data.calculation.payments_summa_rub | number:\'3.2-2\'}}\n\n                        </ion-col>\n\n                        <ion-col text-right *ngSwitchCase="\'dollars\'">\n\n                            {{data.calculation.payments_summa_usd | number:\'3.2-2\'}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                <ion-list>\n\n                    <div *ngFor="let p of data.calculation.payments">\n\n                        <ion-list-header>\n\n                            <ion-grid>\n\n                                <ion-row>\n\n                                    <ion-col>\n\n                                        {{p.name}}\n\n                                    </ion-col>\n\n                                    <ion-col text-right *ngSwitchCase="\'rubles\'">\n\n                                        {{p.summa_rub | number:\'3.2-2\'}}\n\n                                    </ion-col>\n\n                                    <ion-col text-right *ngSwitchCase="\'dollars\'">\n\n                                        {{p.summa_usd | number:\'3.2-2\'}}\n\n                                    </ion-col>\n\n                                </ion-row>\n\n                            </ion-grid>\n\n                        </ion-list-header>\n\n                        <ion-item>\n\n                            {{p.rate}}\n\n                        </ion-item>\n\n                    </div>\n\n                </ion-list>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </div>\n\n\n\n    <ion-card>\n\n        <ion-card-header>\n\n            Курсы валют\n\n        </ion-card-header>\n\n        <ion-card-content>\n\n            <ion-grid>\n\n                <ion-row *ngFor="let c of currencies">\n\n                    <ion-col>\n\n                        {{c.name}}\n\n                    </ion-col>\n\n                    <ion-col text-right>\n\n                        {{c.value}}\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n        </ion-card-content>\n\n    </ion-card>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <button block ion-button icon-left (click)="requestClick()">\n\n            <ion-icon name="thumbs-up"></ion-icon>\n\n            Отправить запрос\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calcresult\calcresult.html"*/
+            selector: 'page-calcresult',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calcresult\calcresult.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Расчет {{data?.chosen?.code}}</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-segment [(ngModel)]="calcCurrs">\n\n        <ion-segment-button value="rubles">\n\n            В рублях\n\n        </ion-segment-button>\n\n        <ion-segment-button value="dollars">\n\n            В дол.США\n\n        </ion-segment-button>\n\n    </ion-segment>\n\n\n\n    <div [ngSwitch]="calcCurrs">\n\n        <ion-card>\n\n            <ion-card-header>\n\n                <ion-grid>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Итого\n\n                        </ion-col>\n\n                        <ion-col text-right *ngSwitchCase="\'rubles\'">\n\n                            {{data.calculation.payments_summa_rub | number:\'3.2-2\'}}\n\n                        </ion-col>\n\n                        <ion-col text-right *ngSwitchCase="\'dollars\'">\n\n                            {{data.calculation.payments_summa_usd | number:\'3.2-2\'}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                <ion-grid>\n\n                    <ion-row *ngFor="let p of data.calculation.payments">\n\n                        <ion-col col-7 class="alt-rate-name">\n\n                            {{p.name}} <span class="alt-rate-hint" (click)="showRateHint(p.name,p.rate)">&nbsp;?&nbsp;</span>\n\n                        </ion-col>\n\n                        <ion-col col-5 text-right *ngSwitchCase="\'rubles\'">\n\n                            {{p.summa_rub | number:\'2.2-2\'}}\n\n                        </ion-col>\n\n                        <ion-col col-5 text-right *ngSwitchCase="\'dollars\'">\n\n                            {{p.summa_usd | number:\'2.2-2\'}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </div>\n\n\n\n    <ion-grid class="alt-title">\n\n        <ion-row>\n\n            <ion-col col-12>Курсы валют</ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n    <ion-card>\n\n        <ion-card-content>\n\n            <ion-grid>\n\n                <ion-row *ngFor="let c of currencies">\n\n                    <ion-col>\n\n                        {{c.name}}\n\n                    </ion-col>\n\n                    <ion-col text-right>\n\n                        {{c.value | number:\'2.4-4\'}}\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n        </ion-card-content>\n\n    </ion-card>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <button block ion-button icon-left (click)="requestClick()">\n\n            <ion-icon name="send"></ion-icon>\n\n            Отправить запрос\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calcresult\calcresult.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object])
     ], CalcResultPage);
     return CalcResultPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=calcresult.js.map
@@ -713,7 +743,7 @@ var AutoCalcPage = (function () {
     };
     AutoCalcPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-autocalc',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\autocalc\autocalc.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Авто калькулятор</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <ion-card>\n\n        <ion-item>\n\n            <ion-label stacked>Тип авто</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.vehicle" cancelText="Отмена" interface="action-sheet" (ionChange)="getParams()">\n\n                <ion-option value="car">ЛЕГКОВОЙ</ion-option>\n\n                <ion-option value="cargo">ГРУЗОВОЙ</ion-option>\n\n                <ion-option value="bus">АВТОБУС</ion-option>\n\n                <ion-option value="bike">МОТОЦИКЛ/МОПЕД</ion-option>\n\n                <ion-option value="tractor">ТЯГАЧ</ion-option>\n\n                <ion-option value="crane">АВТОКРАН</ion-option>\n\n                <ion-option value="quadrocicle">КВАДРОЦИКЛ</ion-option>\n\n                <ion-option value="concretemixer">БЕТОНОМЕШАЛКА</ion-option>\n\n                <ion-option value="driving">АВТОБУРОВАЯ</ion-option>\n\n                <ion-option value="evacuator">ЭВАКУАТОР</ion-option>\n\n                <ion-option value="concretepump">БЕТОНОНАСОС</ion-option>\n\n                <ion-option value="snowmobile">СНЕГОХОД</ion-option>\n\n                <ion-option value="caravan">АВТОПРИЦЕП</ion-option>\n\n                <ion-option value="house">ДОМ-АВТОПРИЦЕП</ion-option>\n\n                <ion-option value="waterbike">ВОДНЫЙ МОТОЦИКЛ</ion-option>\n\n                <ion-option value="boat">КАТЕР (ЯХТА,ЛОДКА)</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Месяц выпуска</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.month" cancelText="Отмена" interface="action-sheet">\n\n                <ion-option *ngFor="let m of months" [value]="m.id">{{m.name}}</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Год выпуска</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.year" cancelText="Отмена" interface="action-sheet">\n\n                <ion-option *ngFor="let y of years" [value]="y">{{y}}</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Стоимость</ion-label>\n\n            <ion-input [(ngModel)]="chosenParams.cost" placeholder="дол. США" min="0"></ion-input>\n\n        </ion-item>\n\n        <ion-item *ngFor="let p of calcParams?.calc_params">\n\n            <ion-label stacked>{{p.name}}</ion-label>\n\n            <ion-select class="max-width" *ngIf="p.code==\'engine\'" [(ngModel)]="chosenParams[p.code]" cancelText="Отмена" interface="action-sheet">\n\n                <ion-option *ngFor="let e of calcParams?.calc_engines" [value]="e.id">{{e.name}}</ion-option>\n\n            </ion-select>\n\n            <ion-input *ngIf="p.code!=\'engine\'" [(ngModel)]="chosenParams[p.code]" [placeholder]="p.dimension" min="0"></ion-input>\n\n        </ion-item>\n\n    </ion-card>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <button block ion-button icon-left (click)="calcClick()">\n\n            <ion-icon name="thumbs-up"></ion-icon>\n\n            Рассчитать\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\autocalc\autocalc.html"*/
+            selector: 'page-autocalc',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\autocalc\autocalc.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Авто калькулятор</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <ion-card>\n\n        <ion-item>\n\n            <ion-label stacked>Тип авто</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.vehicle" cancelText="Отмена" interface="action-sheet" (ionChange)="getParams()">\n\n                <ion-option value="car">ЛЕГКОВОЙ</ion-option>\n\n                <ion-option value="cargo">ГРУЗОВОЙ</ion-option>\n\n                <ion-option value="bus">АВТОБУС</ion-option>\n\n                <ion-option value="bike">МОТОЦИКЛ/МОПЕД</ion-option>\n\n                <ion-option value="tractor">ТЯГАЧ</ion-option>\n\n                <ion-option value="crane">АВТОКРАН</ion-option>\n\n                <ion-option value="quadrocicle">КВАДРОЦИКЛ</ion-option>\n\n                <ion-option value="concretemixer">БЕТОНОМЕШАЛКА</ion-option>\n\n                <ion-option value="driving">АВТОБУРОВАЯ</ion-option>\n\n                <ion-option value="evacuator">ЭВАКУАТОР</ion-option>\n\n                <ion-option value="concretepump">БЕТОНОНАСОС</ion-option>\n\n                <ion-option value="snowmobile">СНЕГОХОД</ion-option>\n\n                <ion-option value="caravan">АВТОПРИЦЕП</ion-option>\n\n                <ion-option value="house">ДОМ-АВТОПРИЦЕП</ion-option>\n\n                <ion-option value="waterbike">ВОДНЫЙ МОТОЦИКЛ</ion-option>\n\n                <ion-option value="boat">КАТЕР (ЯХТА,ЛОДКА)</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Месяц выпуска</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.month" cancelText="Отмена" interface="action-sheet">\n\n                <ion-option *ngFor="let m of months" [value]="m.id">{{m.name}}</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Год выпуска</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.year" cancelText="Отмена" interface="action-sheet">\n\n                <ion-option *ngFor="let y of years" [value]="y">{{y}}</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Стоимость</ion-label>\n\n            <ion-input [(ngModel)]="chosenParams.cost" placeholder="дол. США" min="0"></ion-input>\n\n        </ion-item>\n\n        <ion-item *ngFor="let p of calcParams?.calc_params">\n\n            <ion-label stacked>{{p.name}}</ion-label>\n\n            <ion-select class="max-width" *ngIf="p.code==\'engine\'" [(ngModel)]="chosenParams[p.code]" cancelText="Отмена" interface="action-sheet">\n\n                <ion-option *ngFor="let e of calcParams?.calc_engines" [value]="e.id">{{e.name}}</ion-option>\n\n            </ion-select>\n\n            <ion-input *ngIf="p.code!=\'engine\'" [(ngModel)]="chosenParams[p.code]" [placeholder]="p.dimension" min="0"></ion-input>\n\n        </ion-item>\n\n    </ion-card>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <button block ion-button icon-left (click)="calcClick()">\n\n            <ion-icon name="calculator"></ion-icon>\n\n            Рассчитать\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\autocalc\autocalc.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
@@ -1179,12 +1209,14 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_accordion_accordion__ = __webpack_require__(299);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_rate_rate__ = __webpack_require__(300);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_document_document__ = __webpack_require__(301);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_ion_card_content_collapsable_ion_card_content_collapsable__ = __webpack_require__(302);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1233,7 +1265,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_21__pages_about_about__["a" /* AboutPage */],
                 __WEBPACK_IMPORTED_MODULE_25__components_accordion_accordion__["a" /* AccordionComponent */],
                 __WEBPACK_IMPORTED_MODULE_26__components_rate_rate__["a" /* RateComponent */],
-                __WEBPACK_IMPORTED_MODULE_27__components_document_document__["a" /* DocumentComponent */]
+                __WEBPACK_IMPORTED_MODULE_27__components_document_document__["a" /* DocumentComponent */],
+                __WEBPACK_IMPORTED_MODULE_28__components_ion_card_content_collapsable_ion_card_content_collapsable__["a" /* IonCardContentCollapsableComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1376,7 +1409,7 @@ var AccordionComponent = (function () {
         this.icon = "add";
     }
     AccordionComponent.prototype.ngOnInit = function () {
-        console.log(this.cardContent.nativeElement);
+        //console.log(this.cardContent.nativeElement);
         this.renderer.setElementStyle(this.cardContent.nativeElement, "webkitTransition", "max-height 300ms, padding 500ms");
         // closed
         this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "0px");
@@ -1489,6 +1522,66 @@ var DocumentComponent = (function () {
 }());
 
 //# sourceMappingURL=document.js.map
+
+/***/ }),
+
+/***/ 302:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IonCardContentCollapsableComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var IonCardContentCollapsableComponent = (function () {
+    function IonCardContentCollapsableComponent(renderer) {
+        this.renderer = renderer;
+        this.isCollapsed = true;
+        this.icon = "expand";
+    }
+    IonCardContentCollapsableComponent.prototype.ngOnInit = function () {
+        this.renderer.setElementStyle(this.cardContent.nativeElement, "webkitTransition", "max-height 100ms");
+        this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "100px");
+        //this.renderer.setElementStyle(this.cardContent.nativeElement, "overflow", "hidden");
+    };
+    IonCardContentCollapsableComponent.prototype.toggleContent = function () {
+        if (this.isCollapsed) {
+            this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "100%");
+            this.icon = "crop";
+        }
+        else {
+            this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "100px");
+            this.icon = "expand";
+        }
+        this.isCollapsed = !this.isCollapsed;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])('data'),
+        __metadata("design:type", Object)
+    ], IonCardContentCollapsableComponent.prototype, "data", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])("cc"),
+        __metadata("design:type", Object)
+    ], IonCardContentCollapsableComponent.prototype, "cardContent", void 0);
+    IonCardContentCollapsableComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'ion-card-content-collapsable',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\components\ion-card-content-collapsable\ion-card-content-collapsable.html"*/'<ion-card-header (click)="toggleContent()">\n\n    <ion-row justify-content-around>\n\n        <ion-col col-11>\n\n            <span item-left>{{data.code}}</span>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n            <span item-right><ion-icon [name]="icon"></ion-icon></span>\n\n        </ion-col>\n\n    </ion-row>    \n\n</ion-card-header>\n\n<ion-card-content [innerHtml]="data.name" #cc (click)="toggleContent()"></ion-card-content>'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\components\ion-card-content-collapsable\ion-card-content-collapsable.html"*/
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["V" /* Renderer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["V" /* Renderer */]) === "function" && _a || Object])
+    ], IonCardContentCollapsableComponent);
+    return IonCardContentCollapsableComponent;
+    var _a;
+}());
+
+//# sourceMappingURL=ion-card-content-collapsable.js.map
 
 /***/ }),
 
@@ -1613,13 +1706,14 @@ var CalcPage = (function () {
         this.loadingCtrl = loadingCtrl;
         this.calcSource = calcSource;
         this.alertCtrl = alertCtrl;
-        this.searchTerm = ''; //'3822000000';
+        this.searchTerm = '2402209000';
         this.searching = false;
         this.countrySelectOptions = {
             title: 'Выберите страну',
             enableBackdropDismiss: true
         };
         this.isShowCalc = false;
+        this.isShowHint = false;
         this.chosenParams = {
             direction: "I",
             param_cost: 1000,
@@ -1633,6 +1727,7 @@ var CalcPage = (function () {
     }
     CalcPage.prototype.ionViewDidLoad = function () {
         var _this = this;
+        this.isShowHint = !this.searchTerm.trim();
         this.setFilteredItems();
         this.searchControl.valueChanges.debounceTime(1000).subscribe(function (search) {
             _this.searching = false;
@@ -1644,8 +1739,11 @@ var CalcPage = (function () {
     };
     CalcPage.prototype.getStatsPrice = function (code) {
         var _this = this;
+        this.statsPrice = null;
         this.calcSource.getStats(code).then(function (data) {
-            console.log(data);
+            if (!data.success || data.data.statsprice.maximum == "0.00") {
+                return;
+            }
             _this.statsPrice = data.data.statsprice;
         }, function (error) {
             console.error(error);
@@ -1659,9 +1757,14 @@ var CalcPage = (function () {
                 content: "Загрузка..."
             });
             loaderIndicator_1.present();
-            this.calcSource.getParams(this.searchTerm, this.chosenParams).then(function (data) {
-                console.log(data);
+            this.calcSource.getParams(this.searchTerm.replace(' ', '_'), this.chosenParams).then(function (data) {
                 _this.params = data;
+                console.log(_this.params);
+                if (!data.success || data.data.calc_info.length == 0) {
+                    _this.isShowHint = true;
+                    loaderIndicator_1.dismiss();
+                    return;
+                }
                 // special
                 _this.specialParams = [];
                 for (var i = 0; i < data.data.calc_special.length; i++) {
@@ -1696,8 +1799,9 @@ var CalcPage = (function () {
                         _this.chosenParams[data.data.calc_params[key].code] = 0;
                     }
                 }
-                //console.log(this.calcParams);
+                console.log(_this.calcParams);
                 //console.log(this.chosenParams);
+                _this.isShowHint = false;
                 _this.isShowCalc = true;
                 _this.getStatsPrice(data.data.tnved_code);
                 loaderIndicator_1.dismiss();
@@ -1705,6 +1809,9 @@ var CalcPage = (function () {
                 console.error(error);
                 loaderIndicator_1.dismiss();
             });
+        }
+        else {
+            this.isShowHint = true;
         }
     };
     CalcPage.prototype.tnvedClick = function () {
@@ -1732,12 +1839,12 @@ var CalcPage = (function () {
                     for (var i = 0; i < data.data.calculation.messages.length; i++) {
                         msg += data.data.calculation.messages[i].message + "\r\n";
                     }
-                    var alert_1 = _this.alertCtrl.create({
+                    var alert = _this.alertCtrl.create({
                         title: 'Ошибка',
                         subTitle: msg,
                         buttons: ['OK']
                     });
-                    alert_1.present();
+                    alert.present();
                 }
             }
             else {
@@ -1748,17 +1855,23 @@ var CalcPage = (function () {
             loaderIndicator.dismiss();
         });
     };
+    CalcPage.prototype.checkFocus = function () {
+        var countriesLoader = this.loadingCtrl.create({
+            content: "Загрузка..."
+        });
+        countriesLoader.present();
+        setTimeout(function () {
+            countriesLoader.dismiss();
+        }, 500);
+    };
     CalcPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-calc',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calc\calc.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Калькулятор</ion-title>\n\n    </ion-navbar>\n\n    <ion-toolbar>\n\n        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Код ТНВЭД ТС..."></ion-searchbar>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-card *ngIf="isShowHint">\n\n        <ion-card-content center text-center>\n\n            <p>Не нашли или не знаете код - воспользуйтесь справочником</p>\n\n            <button ion-button (click)="tnvedClick()">ТНВЭД ТС</button>\n\n            <p>или подберите код по </p>\n\n            <button ion-button (click)="examplesClick()">Примеры декларирования</button>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <div *ngIf="isShowCalc" style="padding-bottom: 50px;">\n\n        <ion-card>\n\n            <ion-item>\n\n                <ion-label stacked>Направление перемещения</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams.direction" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">\n\n                    <ion-option value="I">Импорт</ion-option>\n\n                    <ion-option value="E">Экспорт</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Страна</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams.country" interface="alert" cancelText="Отмена" [selectOptions]="countrySelectOptions" (ionChange)="setFilteredItems()">\n\n                    <ion-option *ngFor="let c of params?.data?.countries" [value]="c.code">{{c.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Стоимость, дол. США</ion-label>\n\n                <ion-input [(ngModel)]="chosenParams.param_cost" type="number" min="0"></ion-input>\n\n            </ion-item>\n\n            <!--variable-->\n\n            <ion-item *ngFor="let p of calcParams">\n\n                <ion-label stacked>{{p.description}}</ion-label>\n\n                <ion-input [(ngModel)]="chosenParams[p.code]" type="number" min="0"></ion-input>\n\n            </ion-item>\n\n            <!--special-->\n\n            <ion-item *ngFor="let sp of specialParams">\n\n                <ion-label stacked>{{sp.type_name}}</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams[sp.type]" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">\n\n                    <ion-option *ngFor="let spd of sp?.data" [value]="spd.id">{{spd.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n        </ion-card>\n\n        <ion-card>\n\n            <ion-card-header>\n\n                Среднеконтрактные цены, дол. США/кг\n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                <ion-grid>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Минимум\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.minimum}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Средняя\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.average}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Максимум\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.maximum}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n                <p>Данные за период</p>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </div>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar *ngIf="isShowCalc">\n\n        <button block ion-button icon-left (click)="calcClick()">\n\n            <ion-icon name="thumbs-up"></ion-icon>\n\n            Рассчитать\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calc\calc.html"*/
+            selector: 'page-calc',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calc\calc.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Калькулятор</ion-title>\n\n    </ion-navbar>\n\n    <ion-toolbar>\n\n        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Код ТНВЭД ТС..."></ion-searchbar>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-card *ngIf="isShowHint">\n\n        <ion-card-content center text-center>\n\n            <p>Не нашли или не знаете код - воспользуйтесь справочником</p>\n\n            <button ion-button (click)="tnvedClick()">ТНВЭД ТС</button>\n\n            <p>или подберите код по </p>\n\n            <button ion-button (click)="examplesClick()">Примеры декларирования</button>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <div *ngIf="isShowCalc" style="padding-bottom: 50px;">\n\n        \n\n        <ion-grid class="alt-title">\n\n            <ion-row>\n\n                <ion-col col-12><h5>{{params?.data?.calc_info?.name}}</h5></ion-col>\n\n            </ion-row>\n\n        </ion-grid>\n\n\n\n        <ion-card>\n\n            <ion-card-header>\n\n                Параметры расчета\n\n            </ion-card-header>\n\n            <ion-item>\n\n                <ion-label stacked>Направление перемещения</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams.direction" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">\n\n                    <ion-option value="I">Импорт</ion-option>\n\n                    <ion-option value="E">Экспорт</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Страна</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams.country" interface="alert" cancelText="Отмена" [selectOptions]="countrySelectOptions" (ionChange)="setFilteredItems()" (ionFocus)="checkFocus()">\n\n                    <ion-option *ngFor="let c of params?.data?.countries" [value]="c.code">{{c.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Стоимость, дол. США</ion-label>\n\n                <ion-input [(ngModel)]="chosenParams.param_cost" type="tel" min="0"></ion-input>\n\n            </ion-item>\n\n            <!--variable-->\n\n            <ion-item *ngFor="let p of calcParams">\n\n                <ion-label stacked>{{p.name}}<span *ngIf="p.dimension">, {{p.dimension}}</span></ion-label>\n\n                <ion-input [(ngModel)]="chosenParams[p.code]" type="tel" min="0"></ion-input>\n\n            </ion-item>\n\n            <!--special-->\n\n            <ion-item *ngFor="let sp of specialParams">\n\n                <ion-label stacked>{{sp.type_name}}</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams[sp.type]" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">\n\n                    <ion-option *ngFor="let spd of sp?.data" [value]="spd.id">{{spd.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n        </ion-card>\n\n\n\n        <ion-grid class="alt-title" *ngIf="statsPrice">\n\n            <ion-row>\n\n                <ion-col col-12>Среднеконтрактные цены, $/кг</ion-col>\n\n            </ion-row>\n\n        </ion-grid>\n\n\n\n        <ion-card *ngIf="statsPrice">\n\n            <ion-card-content>\n\n                <ion-grid>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Минимум\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.minimum}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Средняя\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.average}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Максимум\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.maximum}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n                <p class="alt-hint">* Данные за полгода</p>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </div>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar *ngIf="isShowCalc">\n\n        <button block ion-button icon-left (click)="calcClick()">\n\n            <ion-icon name="calculator"></ion-icon>\n\n            Рассчитать\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calc\calc.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_calcsource__["a" /* CalcSource */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_calcsource__["a" /* CalcSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_calcsource__["a" /* CalcSource */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
     ], CalcPage);
     return CalcPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=calc.js.map

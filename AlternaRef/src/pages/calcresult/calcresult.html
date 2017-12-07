@@ -36,36 +36,30 @@
                 </ion-grid>
             </ion-card-header>
             <ion-card-content>
-                <ion-list>
-                    <div *ngFor="let p of data.calculation.payments">
-                        <ion-list-header>
-                            <ion-grid>
-                                <ion-row>
-                                    <ion-col>
-                                        {{p.name}}
-                                    </ion-col>
-                                    <ion-col text-right *ngSwitchCase="'rubles'">
-                                        {{p.summa_rub | number:'3.2-2'}}
-                                    </ion-col>
-                                    <ion-col text-right *ngSwitchCase="'dollars'">
-                                        {{p.summa_usd | number:'3.2-2'}}
-                                    </ion-col>
-                                </ion-row>
-                            </ion-grid>
-                        </ion-list-header>
-                        <ion-item>
-                            {{p.rate}}
-                        </ion-item>
-                    </div>
-                </ion-list>
+                <ion-grid>
+                    <ion-row *ngFor="let p of data.calculation.payments">
+                        <ion-col col-7 class="alt-rate-name">
+                            {{p.name}} <span class="alt-rate-hint" (click)="showRateHint(p.name,p.rate)">&nbsp;?&nbsp;</span>
+                        </ion-col>
+                        <ion-col col-5 text-right *ngSwitchCase="'rubles'">
+                            {{p.summa_rub | number:'2.2-2'}}
+                        </ion-col>
+                        <ion-col col-5 text-right *ngSwitchCase="'dollars'">
+                            {{p.summa_usd | number:'2.2-2'}}
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
             </ion-card-content>
         </ion-card>
     </div>
 
+    <ion-grid class="alt-title">
+        <ion-row>
+            <ion-col col-12>Курсы валют</ion-col>
+        </ion-row>
+    </ion-grid>
+
     <ion-card>
-        <ion-card-header>
-            Курсы валют
-        </ion-card-header>
         <ion-card-content>
             <ion-grid>
                 <ion-row *ngFor="let c of currencies">
@@ -73,7 +67,7 @@
                         {{c.name}}
                     </ion-col>
                     <ion-col text-right>
-                        {{c.value}}
+                        {{c.value | number:'2.4-4'}}
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -84,7 +78,7 @@
 <ion-footer no-border>
     <ion-toolbar>
         <button block ion-button icon-left (click)="requestClick()">
-            <ion-icon name="thumbs-up"></ion-icon>
+            <ion-icon name="send"></ion-icon>
             Отправить запрос
         </button>
     </ion-toolbar>

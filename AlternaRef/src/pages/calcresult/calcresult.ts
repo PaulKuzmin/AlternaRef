@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 
 @Component({
     selector: 'page-calcresult',
@@ -13,7 +13,8 @@ export class CalcResultPage {
 
     constructor(
         public navCtrl: NavController,
-        public navParams: NavParams
+        public navParams: NavParams,
+        public alertCtrl: AlertController
     ) {
         this.data = this.navParams.get("data");
 
@@ -24,6 +25,15 @@ export class CalcResultPage {
 
     ionViewDidLoad() {
         //console.log(this.currencies);
+    }
+
+    showRateHint(taxName, rate) {
+        let alert = this.alertCtrl.create({
+            title: taxName,
+            subTitle: 'Ставка: ' + rate,
+            buttons: ['OK']
+        });
+        alert.present();
     }
 
     requestClick() {

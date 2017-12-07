@@ -26662,8 +26662,64 @@ rate .alt-rate {
   padding-bottom: 0px;
 }
 
-.max-width {
+page-calc .alt-title {
+  padding: 5px 5px 0px 5px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #000;
+}
+
+page-calc .max-width {
   max-width: 100%;
+}
+
+page-calc .label {
+  color: #999;
+  font-size: 1.4rem !important;
+}
+
+page-calc .alt-hint {
+  font-style: italic;
+  text-align: center;
+  color: #000;
+}
+
+page-calc .card-content {
+  padding: 5px 5px;
+}
+
+page-calcresult .alt-title {
+  padding: 5px 5px 0px 5px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #000;
+}
+
+page-calcresult .alt-rate-hint {
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #ff8b00;
+  border-radius: 50px/50px;
+  border: solid 1px #ff8b00;
+  cursor: pointer;
+}
+
+page-calcresult .segment, page-calcresult .segment-md .segment-button, page-calcresult .segment-ios .segment-button {
+  font-size: 1.4rem !important;
+  font-weight: bold !important;
+}
+
+page-calcresult .card-header {
+  padding: 5px 5px 0px 5px;
+  font-weight: bold;
+}
+
+page-calcresult .card-content {
+  padding: 5px 5px;
+}
+
+page-calcresult .alt-rate-name {
+  font-size: 1.3rem;
 }
 
 page-home .center {

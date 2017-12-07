@@ -13,7 +13,7 @@ import { CalcResultPage } from "../../pages/calcresult/calcresult";
 })
 export class CalcPage {
 
-    searchTerm: string = '';//'3822000000';
+    searchTerm: string = '2402209000';
     searchControl: FormControl;
     searching: any = false;
     params: any;
@@ -63,9 +63,12 @@ export class CalcPage {
     }
 
     getStatsPrice(code: string) {
+        this.statsPrice = null;
         this.calcSource.getStats(code).then(
             data => {
-                console.log(data);
+                if (!data.success || data.data.statsprice.maximum == "0.00") {
+                    return;
+                }
                 this.statsPrice = data.data.statsprice;
             },
             error => {
@@ -82,9 +85,9 @@ export class CalcPage {
             loaderIndicator.present();
 
             this.calcSource.getParams(this.searchTerm.replace(' ', '_'), this.chosenParams).then(
-                data => {
-                    console.log(data);
+                data => {                    
                     this.params = data;
+                    console.log(this.params);
 
                     if (!data.success || data.data.calc_info.length == 0) {
                         this.isShowHint = true;
@@ -127,7 +130,7 @@ export class CalcPage {
                             this.chosenParams[data.data.calc_params[key].code] = 0;
                         }
                     }
-                    //console.log(this.calcParams);
+                    console.log(this.calcParams);
                     //console.log(this.chosenParams);
 
                     this.isShowHint = false;
@@ -190,5 +193,16 @@ export class CalcPage {
                 loaderIndicator.dismiss();
             }
         );
+    }
+
+    checkFocus() {
+        let countriesLoader = this.loadingCtrl.create({
+            content: "Загрузка..."
+        });
+        countriesLoader.present();
+
+        setTimeout(() => {
+            countriesLoader.dismiss();
+        }, 500);
     }
 }

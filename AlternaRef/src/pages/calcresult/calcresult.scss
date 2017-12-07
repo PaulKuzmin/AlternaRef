@@ -1,3 +1,37 @@
 page-calcresult {
+    .alt-title {
+        padding: 5px 5px 0px 5px;
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: #000;
+    }
 
+    .alt-rate-hint {
+        font-weight: bold;
+        font-size: 1.6rem;
+        color: $link-color;
+        -moz-border-radius: 50px/50px;
+        -webkit-border-radius: 50px 50px;
+        border-radius: 50px/50px;
+        border: solid 1px $link-color;
+        cursor: pointer;
+    }
+
+    .segment, .segment-md .segment-button, .segment-ios .segment-button {
+        font-size: 1.4rem !important;
+        font-weight: bold !important;
+    }
+
+    .card-header {
+        padding: 5px 5px 0px 5px;
+        font-weight: bold;
+    }
+
+    .card-content {
+        padding: 5px 5px;
+    }
+
+    .alt-rate-name {
+        font-size: 1.3rem;
+    }
 }

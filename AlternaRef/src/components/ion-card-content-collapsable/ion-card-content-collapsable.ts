@@ -20,7 +20,7 @@ export class IonCardContentCollapsableComponent implements OnInit {
     ngOnInit() {
         this.renderer.setElementStyle(this.cardContent.nativeElement, "webkitTransition", "max-height 100ms");
 
-        this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "130px");
+        this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "100px");
         //this.renderer.setElementStyle(this.cardContent.nativeElement, "overflow", "hidden");
     }
 
@@ -29,7 +29,7 @@ export class IonCardContentCollapsableComponent implements OnInit {
             this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "100%");
             this.icon = "crop";
         } else {
-            this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "130px");
+            this.renderer.setElementStyle(this.cardContent.nativeElement, "max-height", "100px");
             this.icon = "expand";
         }
 

@@ -50,9 +50,10 @@ export class TnvCodePage {
 
     examplesClick() {
         let searchCode = this.code;
-        if (searchCode.indexOf('_')) {
+        if (searchCode.indexOf('_') > 8) {
             searchCode = searchCode.substr(0, searchCode.indexOf('_'));
         }
+        console.log(searchCode);
         this.navCtrl.push(ExamplesPage, {
             text: searchCode
         });
