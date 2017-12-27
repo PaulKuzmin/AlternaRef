@@ -3,11 +3,120 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>О программе</ion-title>
+        <ion-title>О компании</ion-title>
     </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+    <ion-card>
+        <div class="contacts-logo"></div>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12 class="alt-label">
+                        <ion-icon name="call"></ion-icon> Телефоны: 
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <a href="tel: +74959090513">
+                            +7 (495) 909-05-13
+                        </a>
+                    </ion-col>
+                    <ion-col col-12>
+                        <a href="tel: +74232650983">
+                            +7 (423) 265-09-83
+                        </a>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12 class="alt-label">
+                        <ion-icon name="mail"></ion-icon> Email:
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <a href="mailto:alternadv@gmail.com">
+                            alternadv@gmail.com
+                        </a>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12 class="alt-label">
+                        <ion-icon name="globe"></ion-icon> Web:
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        <a href="https://alterna.ltd/">
+                            https://alterna.ltd/
+                        </a>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <p>
+                Транспортно-логистическая компания «Альтерна» - таможенный представитель с многолетним успешным опытом работы в сфере ВЭД. 
+                Мы занимаемся таможенным оформлением и доставкой грузов любой категории из всех стран Азии (Китай, Корея, Япония и т.д.) в Россию.
+            </p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card *ngFor="let a of all">
+        <ion-card-title>
+            {{a.short_name}}
+        </ion-card-title>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12 class="alt-label">
+                        <ion-icon name="navigate"></ion-icon> Адрес:
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-12>
+                        {{a.address}}
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12 class="alt-label">
+                        <ion-icon name="call"></ion-icon> Телефоны:
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let p of a.contacts.phones1">
+                    <ion-col col-12>
+                        <a href="tel: +74959090513">
+                            {{p}}
+                        </a>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let p of a.contacts.phones2">
+                    <ion-col col-12>
+                        <a href="tel: +74959090513">
+                            {{p}}
+                        </a>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12 class="alt-label">
+                        <ion-icon name="mail"></ion-icon> Email:
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let e of a.contacts.emails">
+                    <ion-col col-12>
+                        <a href="mailto:{{e}}">
+                            {{e}}
+                        </a>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

@@ -29,9 +29,6 @@
         </ion-grid>
 
         <ion-card>
-            <ion-card-header>
-                Параметры расчета
-            </ion-card-header>
             <ion-item>
                 <ion-label stacked>Направление перемещения</ion-label>
                 <ion-select class="max-width" [(ngModel)]="chosenParams.direction" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">

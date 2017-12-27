@@ -31,8 +31,8 @@ export class MyApp {
           });
 
         this.pages = [
-            { title: 'Запрос', component: RequestPage },
-            { title: 'О программе', component: AboutPage }
+            { title: 'Отправить запрос', component: RequestPage },
+            { title: 'О компании', component: AboutPage }
         ];
     }
 

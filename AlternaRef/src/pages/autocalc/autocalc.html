@@ -11,7 +11,7 @@
     <ion-card>
         <ion-item>
             <ion-label stacked>Тип авто</ion-label>
-            <ion-select class="max-width" [(ngModel)]="chosenParams.vehicle" cancelText="Отмена" interface="action-sheet" (ionChange)="getParams()">
+            <ion-select class="max-width" [(ngModel)]="chosenParams.vehicle" cancelText="Отмена" interface="alert" (ionChange)="getParams()">
                 <ion-option value="car">ЛЕГКОВОЙ</ion-option>
                 <ion-option value="cargo">ГРУЗОВОЙ</ion-option>
                 <ion-option value="bus">АВТОБУС</ion-option>
@@ -32,13 +32,13 @@
         </ion-item>
         <ion-item>
             <ion-label stacked>Месяц выпуска</ion-label>
-            <ion-select class="max-width" [(ngModel)]="chosenParams.month" cancelText="Отмена" interface="action-sheet">
+            <ion-select class="max-width" [(ngModel)]="chosenParams.month" cancelText="Отмена" interface="alert">
                 <ion-option *ngFor="let m of months" [value]="m.id">{{m.name}}</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label stacked>Год выпуска</ion-label>
-            <ion-select class="max-width" [(ngModel)]="chosenParams.year" cancelText="Отмена" interface="action-sheet">
+            <ion-select class="max-width" [(ngModel)]="chosenParams.year" cancelText="Отмена" interface="alert">
                 <ion-option *ngFor="let y of years" [value]="y">{{y}}</ion-option>
             </ion-select>
         </ion-item>
@@ -47,8 +47,8 @@
             <ion-input [(ngModel)]="chosenParams.cost" placeholder="дол. США" min="0"></ion-input>
         </ion-item>
         <ion-item *ngFor="let p of calcParams?.calc_params">
-            <ion-label stacked>{{p.name}}</ion-label>
-            <ion-select class="max-width" *ngIf="p.code=='engine'" [(ngModel)]="chosenParams[p.code]" cancelText="Отмена" interface="action-sheet">
+            <ion-label stacked>{{p.name}}<!--<span *ngIf="p.dimension">, {{p.dimension}}</span>--></ion-label>
+            <ion-select class="max-width" *ngIf="p.code=='engine'" [(ngModel)]="chosenParams[p.code]" cancelText="Отмена" interface="alert">
                 <ion-option *ngFor="let e of calcParams?.calc_engines" [value]="e.id">{{e.name}}</ion-option>
             </ion-select>
             <ion-input *ngIf="p.code!='engine'" [(ngModel)]="chosenParams[p.code]" [placeholder]="p.dimension" min="0"></ion-input>

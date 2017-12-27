@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { RequestPage } from '../../pages/request/request';
 
 @Component({
     selector: 'page-calcresult',
@@ -37,6 +38,23 @@ export class CalcResultPage {
     }
 
     requestClick() {
+        let message = '';
+        if (this.data && this.data.hasOwnProperty('chosen') && this.data.chosen) {
+            message = 'Здравствуйте! Рассчитайте, пожалуйста: ' + this.data.chosen.code;
 
+            if (this.data.chosen.direction == 'E') {
+                message += '; направление перемещения: экспорт';
+            } else {
+                message += '; направление перемещения: импорт';
+            }
+
+            if (this.data.chosen.country && this.data.chosen.country != '000') {
+                message += '; код страны: ' + this.data.chosen.country;
+            }
+
+            message += '; стоимость, дол.США: ' + this.data.chosen.param_cost;
+        }
+
+        this.navCtrl.push(RequestPage, { message: message });
     }
 }

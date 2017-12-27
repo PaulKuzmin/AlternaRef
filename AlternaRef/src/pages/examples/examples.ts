@@ -79,7 +79,7 @@ export class ExamplesPage {
             this.isShowNotFound = false;
         }
 
-        console.log(this.isShowHint);
+        //console.log(this.isShowHint);
     }
 
     tnvedClick(code: string) {

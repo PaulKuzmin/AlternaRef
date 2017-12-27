@@ -26644,7 +26644,7 @@ accordion .card-content {
 }
 
 ion-card-content-collapsable .card-header {
-  padding: 17px 17px 0px 10px;
+  padding: 8px 17px 0px 10px;
   font-size: 1.8rem;
   font-weight: bold;
   color: #999;
@@ -26660,6 +26660,86 @@ rate .card-content {
 
 rate .alt-rate {
   padding-bottom: 0px;
+}
+
+page-about .contacts-logo {
+  background-image: url("https://alterna.ltd/files/images/logo/top-logo.jpg");
+  background-position-x: center;
+  background-position-y: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 107px;
+  margin-top: 20px;
+}
+
+page-about .card-content {
+  padding: 8px 12px;
+}
+
+page-about .card p {
+  margin: 5px 8px;
+}
+
+page-about .alt-label {
+  font-weight: bold;
+  color: #000;
+}
+
+page-about .card-title {
+  color: #000;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin: 0px 0;
+  color: #999;
+  padding: 18px 16px 0px 16px;
+}
+
+page-about .grid {
+  padding: 0px;
+}
+
+page-autocalc .max-width {
+  max-width: 100%;
+}
+
+page-autocalc .label {
+  color: #999;
+  font-size: 1.4rem !important;
+}
+
+page-autocalcresult .alt-title {
+  padding: 5px 5px 0px 5px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #000;
+}
+
+page-autocalcresult .alt-rate-hint {
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #ff8b00;
+  border-radius: 50px/50px;
+  border: solid 1px #ff8b00;
+  cursor: pointer;
+}
+
+page-autocalcresult .segment, page-autocalcresult .segment-md .segment-button, page-autocalcresult .segment-ios .segment-button {
+  font-size: 1.4rem !important;
+  font-weight: bold !important;
+}
+
+page-autocalcresult .card-header {
+  padding: 5px 5px 0px 5px;
+  font-weight: bold;
+}
+
+page-autocalcresult .card-content {
+  padding: 5px 5px;
+}
+
+page-autocalcresult .alt-rate-name {
+  font-size: 1.3rem;
 }
 
 page-calc .alt-title {
@@ -26789,6 +26869,44 @@ page-home .card-header {
 
 page-home .card-content {
   font-size: 1.6rem;
+}
+
+page-request .card-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #999;
+}
+
+page-request .card-content {
+  padding: 0px 16px;
+}
+
+page-request .item {
+  padding: 0px 0px;
+}
+
+page-request .label {
+  color: #999;
+  font-size: 1.4rem !important;
+}
+
+page-rois .card-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #999;
+  white-space: normal;
+  padding: 0px 16px 8px 16px;
+}
+
+page-rois .card {
+  padding-top: 16px;
+}
+
+page-rois .rois-image {
+  width: 150px;
+  height: 150px;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 page-tnvcode .alt-title {

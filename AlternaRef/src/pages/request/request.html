@@ -3,32 +3,29 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>request</ion-title>
+        <ion-title>Запрос</ion-title>
     </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
     <ion-card>
-        <ion-card-header>
-            Запрос на просчет
-        </ion-card-header>
         <ion-card-content>
             <ion-item>
                 <ion-label stacked>Имя</ion-label>
-                <ion-input [(ngModel)]="chosenParams.name"></ion-input>
+                <ion-input [(ngModel)]="chosenParams.name" type="email" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Телефон</ion-label>
-                <ion-input [(ngModel)]="chosenParams.phone"></ion-input>
+                <ion-input [(ngModel)]="chosenParams.phone" type="tel" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Email</ion-label>
-                <ion-input [(ngModel)]="chosenParams.email"></ion-input>
+                <ion-input [(ngModel)]="chosenParams.email" type="text" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Сообщение</ion-label>
-                <ion-textarea [(ngModel)]="chosenParams.message"></ion-textarea>
+                <ion-textarea [(ngModel)]="chosenParams.message" rows="8" required></ion-textarea>
             </ion-item>
         </ion-card-content>
     </ion-card>
@@ -37,7 +34,7 @@
 <ion-footer no-border>
     <ion-toolbar>
         <button block ion-button icon-left (click)="sendClick()">
-            <ion-icon name="thumbs-up"></ion-icon>
+            <ion-icon name="send"></ion-icon>
             Отправить
         </button>
     </ion-toolbar>

@@ -21,6 +21,7 @@ import { AutoCalcSource } from '../providers/autocalcsource';
 import { RequestPage } from "../pages/request/request";
 import { AboutPage } from "../pages/about/about";
 import { MailSource } from '../providers/mailsource';
+import { ContactSource } from '../providers/contactsource';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -79,6 +80,7 @@ import { IonCardContentCollapsableComponent } from "../components/ion-card-conte
       CalcSource,
       AutoCalcSource,
       MailSource,
+      ContactSource,
       { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

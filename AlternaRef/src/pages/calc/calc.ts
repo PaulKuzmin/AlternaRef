@@ -13,7 +13,7 @@ import { CalcResultPage } from "../../pages/calcresult/calcresult";
 })
 export class CalcPage {
 
-    searchTerm: string = '2402209000';
+    searchTerm: string = '';//'2402209000';
     searchControl: FormControl;
     searching: any = false;
     params: any;
@@ -28,7 +28,7 @@ export class CalcPage {
 
     chosenParams: any = {
         direction: "I",
-        param_cost: 1000,
+        param_cost: 0,
         country: "000"
     };
 

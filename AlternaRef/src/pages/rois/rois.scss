@@ -1,3 +1,20 @@
 page-rois {
+    .card-header {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #999;
+        white-space: normal;
+        padding: 0px 16px 8px 16px;
+    }
 
+    .card {
+        padding-top: 16px;
+    }
+
+    .rois-image {
+        width: 150px;
+        height: 150px;
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
 }

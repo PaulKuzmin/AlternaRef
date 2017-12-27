@@ -17,6 +17,9 @@ export class RoisPage {
     labels: any;
     searching: any = false;
 
+    isShowHint: boolean = true;
+    isShowNotFound: boolean = false;
+
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -39,6 +42,7 @@ export class RoisPage {
     }
 
     setFilteredItems() {
+        console.log(this.isShowHint);
         if (this.searchTerm.length > 0) {
             let loaderIndicator = this.loadingCtrl.create({
                 content: "Загрузка..."
@@ -46,15 +50,29 @@ export class RoisPage {
             loaderIndicator.present();
             this.oisSource.getList(this.searchTerm).then(
                 data => {
-                    console.log(data);
-                    this.items = data.ois_list;
-                    this.labels = data.ois_description;
+                    if (data.ois_list.length > 0) {
+                        this.items = data.ois_list;
+                        this.labels = data.ois_description;
+                        this.isShowHint = false;
+                        this.isShowNotFound = false;
+                    } else {
+                        this.items = null;
+                        this.labels = null;
+                        this.isShowHint = false;
+                        this.isShowNotFound = true;
+                    }
+
                     loaderIndicator.dismiss();
                 },
                 error => {
                     console.error(error);
                     loaderIndicator.dismiss();
                 });
+        } else {
+            this.items = null;
+            this.labels = null;
+            this.isShowHint = true;
+            this.isShowNotFound = false;
         }
     }
 }

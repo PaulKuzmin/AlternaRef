@@ -11,6 +11,20 @@
 </ion-header>
 
 <ion-content padding>    
+
+    <ion-card *ngIf="isShowHint">
+        <ion-card-content center text-center>
+            <p>Проверьте торговую марку в</p>
+            <p>реестре объектов интеллектуальной собственности.</p>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="isShowNotFound">
+        <ion-card-content center text-center>
+            <p>По вашему запросу ничего не найдено!</p>
+        </ion-card-content>
+    </ion-card>
+
     <ion-list>
         <ion-card *ngFor="let item of items">
             <ion-card-header>
@@ -98,7 +112,7 @@
             </ion-card-content>
 
             <ion-card-content *ngIf="item.image">
-                <ion-img src="https://alterna.ltd/img/ois/{{item.image}}" [width]="150" [height]="150" no-padding no-margin></ion-img>
+                <div class="rois-image" [style.background-image]="'url(https://alterna.ltd/img/ois/'+item.image+')'"></div>
             </ion-card-content>
         </ion-card>
     </ion-list>

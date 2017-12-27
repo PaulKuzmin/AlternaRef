@@ -89,14 +89,14 @@ export class AutoCalcPage {
             data => {
                 console.log(data);
                 if (data.success) {
-                    if ((data.data.calculation.F.hasOwnProperty("success") && data.data.calculation.F.success) ||
+                    if ((data.data.calculation.hasOwnProperty("F") && data.data.calculation.F.hasOwnProperty("success") && data.data.calculation.F.success) ||
                         (data.data.calculation.U.hasOwnProperty("success") && data.data.calculation.U.success)) {
                         this.navCtrl.push(AutoCalcResultPage, {
                             data: data.data
                         });
                     } else {
                         let msg = '';
-                        if (data.data.calculation.F.hasOwnProperty("success")) {
+                        if (data.data.calculation.hasOwnProperty("F") && data.data.calculation.F.hasOwnProperty("success")) {
                             for (var i = 0; i < data.data.calculation.F.messages.length; i++) {
                                 msg += data.data.calculation.F.messages[i].message + "\r\n";
                             }
