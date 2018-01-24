@@ -98,13 +98,13 @@ export class AutoCalcPage {
                         let msg = '';
                         if (data.data.calculation.hasOwnProperty("F") && data.data.calculation.F.hasOwnProperty("success")) {
                             for (var i = 0; i < data.data.calculation.F.messages.length; i++) {
-                                msg += data.data.calculation.F.messages[i].message + "\r\n";
+                                msg += data.data.calculation.F.messages[i].message + '<br>';
                             }
                         }
 
                         if (data.data.calculation.U.hasOwnProperty("success")) {
                             for (var i = 0; i < data.data.calculation.U.messages.length; i++) {
-                                msg += data.data.calculation.U.messages[i].message + "\r\n";
+                                msg += data.data.calculation.U.messages[i].message + '<br>';
                             }
                         }
 

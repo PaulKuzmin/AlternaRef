@@ -28,7 +28,7 @@ export class CalcPage {
 
     chosenParams: any = {
         direction: "I",
-        param_cost: 0,
+        param_cost: null,
         country: "000"
     };
 
@@ -127,7 +127,7 @@ export class CalcPage {
                         data.data.calc_params[key].code = 'param_' + data.data.calc_params[key].code;
                         this.calcParams.push(data.data.calc_params[key]);
                         if (!this.chosenParams[data.data.calc_params[key].code]) {
-                            this.chosenParams[data.data.calc_params[key].code] = 0;
+                            this.chosenParams[data.data.calc_params[key].code] = null;
                         }
                     }
                     console.log(this.calcParams);

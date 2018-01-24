@@ -43,14 +43,23 @@
                 </ion-select>
             </ion-item>
             <ion-item>
-                <ion-label stacked>Стоимость, дол. США</ion-label>
-                <ion-input [(ngModel)]="chosenParams.param_cost" type="tel" min="0"></ion-input>
+                <ion-label stacked>Стоимость</ion-label>
+                <ion-input [(ngModel)]="chosenParams.param_cost" type="tel" min="0" placeholder="дол. США"></ion-input>
             </ion-item>
             <!--variable-->
             <ion-item *ngFor="let p of calcParams">
-                <ion-label stacked>{{p.name}}<span *ngIf="p.dimension">, {{p.dimension}}</span></ion-label>
-                <ion-input [(ngModel)]="chosenParams[p.code]" type="tel" min="0"></ion-input>
+                <ion-label stacked>{{p.name}}</ion-label>
+                <ion-input [(ngModel)]="chosenParams[p.code]" type="tel" min="0" placeholder="{{p.dimension}}"></ion-input>
             </ion-item>
+        </ion-card>
+
+        <ion-grid class="alt-title" *ngIf="specialParams">
+            <ion-row>
+                <ion-col col-12>Особые условия</ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-card>
             <!--special-->
             <ion-item *ngFor="let sp of specialParams">
                 <ion-label stacked>{{sp.type_name}}</ion-label>
