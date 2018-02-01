@@ -39,7 +39,7 @@ export class ExamplesPage {
 
     ionViewDidLoad() {
         this.setFilteredItems();
-        this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+        this.searchControl.valueChanges.debounceTime(3000).subscribe(search => {
             this.searching = false;
             this.setFilteredItems();
         });

@@ -4,7 +4,7 @@
     <ToolsVersionPromptShown>0.0</ToolsVersionPromptShown>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">
-    <DebuggerFlavor>SimulateNexus10</DebuggerFlavor>
+    <DebuggerFlavor>AndroidEmulator</DebuggerFlavor>
     <AndroidEmulatorID>AndroidEmulatorTablet;Google Emulator - Tablet</AndroidEmulatorID>
   </PropertyGroup>
 </Project>

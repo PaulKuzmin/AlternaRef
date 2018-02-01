@@ -3,20 +3,27 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Калькулятор</ion-title>
+        <ion-title>Калькулятор товаров</ion-title>
     </ion-navbar>
-    <ion-toolbar>
-        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Код ТНВЭД ТС..."></ion-searchbar>
+    <ion-toolbar id="searchToolbarID">
+        <ion-searchbar type="tel" [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Введите код ТН ВЭД..."></ion-searchbar>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
     <ion-card *ngIf="isShowHint">
         <ion-card-content center text-center>
-            <p>Не нашли или не знаете код - воспользуйтесь справочником</p>
-            <button ion-button (click)="tnvedClick()">ТНВЭД ТС</button>
-            <p>или подберите код по </p>
-            <button ion-button (click)="examplesClick()">Примеры декларирования</button>
+            <p>Не нашли или не знаете код?</p>
+            <p>Воспользуйтесь справочником:</p>
+            <button ion-button (click)="tnvedClick()">ТН ВЭД</button>
+            <p>или подберите код, используя </p>
+            <button ion-button (click)="examplesClick()">примеры декларирования</button>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="isShowHint">
+        <ion-card-content center text-center>
+            <p>Справочник ТН ВЭД поможет вам точно подобрать код ТН ВЭД, а также получить дополнительную информацию по товару. В частности, в справочнике вы быстро найдете сведения о размерах ставок импортных и экспортных пошлины, акцизов, НДС и других платежей.</p>
         </ion-card-content>
     </ion-card>
 

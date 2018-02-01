@@ -5,8 +5,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DataSource {
-    readonly endpoint = 'https://alterna.ltd/';
-    //readonly endpoint = '/api/';
+    //readonly endpoint = 'https://alterna.ltd/';
+    readonly endpoint = '/api/';
 
     constructor(public http: Http) {
         

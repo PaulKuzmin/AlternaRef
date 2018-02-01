@@ -85,24 +85,25 @@
         </ion-card>
     </div>
 
-    <ion-grid class="alt-title">
-        <ion-row>
-            <ion-col col-12>Курсы валют</ion-col>
-        </ion-row>
-    </ion-grid>
+    <accordion title="Курсы валют" [hidden]="!currencies">
+        <ion-grid>
+            <ion-row *ngFor="let c of currencies">
+                <ion-col>
+                    {{c.name}}
+                </ion-col>
+                <ion-col text-right>
+                    {{c.value | number:'2.4-4'}}
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </accordion>
 
     <ion-card>
         <ion-card-content>
-            <ion-grid>
-                <ion-row *ngFor="let c of currencies">
-                    <ion-col>
-                        {{c.name}}
-                    </ion-col>
-                    <ion-col text-right>
-                        {{c.value | number:'2.4-4'}}
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
+            <div id="challengeID">
+                <p>Дорого?</p>
+                <p>Отправьте запрос и получите индивидуальный расчет!</p>
+            </div>
         </ion-card-content>
     </ion-card>
 </ion-content>

@@ -3,7 +3,7 @@
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
-        <ion-title>Реестр ОИС</ion-title>
+        <ion-title>Реестр объектов интеллектуальной собственности</ion-title>
     </ion-navbar>
     <ion-toolbar>
         <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Наименование..."></ion-searchbar>
@@ -14,8 +14,7 @@
 
     <ion-card *ngIf="isShowHint">
         <ion-card-content center text-center>
-            <p>Проверьте торговую марку в</p>
-            <p>реестре объектов интеллектуальной собственности.</p>
+            <p>Проверьте, находится ли торговая марка вашего товара в реестре объектов интеллектуальной собственности</p>
         </ion-card-content>
     </ion-card>
 

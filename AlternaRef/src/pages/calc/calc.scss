@@ -13,6 +13,7 @@ page-calc {
     .label {
         color: #999;
         font-size: 1.4rem !important;
+        font-weight: bold;
     }
 
     .alt-hint {
@@ -23,5 +24,13 @@ page-calc {
 
     .card-content {
         padding: 5px 5px
+    }
+
+    .searchbar-input {
+        font-style: italic !important;
+    }
+
+    .text-input {
+        font-style: italic;
     }
 }

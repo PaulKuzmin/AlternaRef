@@ -13,19 +13,19 @@
         <ion-card-content>
             <ion-item>
                 <ion-label stacked>Имя</ion-label>
-                <ion-input [(ngModel)]="chosenParams.name" type="email" required></ion-input>
+                <ion-input [(ngModel)]="chosenParams.name" type="email" placeholder="Иван Иванов" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Телефон</ion-label>
-                <ion-input [(ngModel)]="chosenParams.phone" type="tel" required></ion-input>
+                <ion-input [(ngModel)]="chosenParams.phone" type="tel" placeholder="89876543210" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Email</ion-label>
-                <ion-input [(ngModel)]="chosenParams.email" type="text" required></ion-input>
+                <ion-input [(ngModel)]="chosenParams.email" type="text" placeholder="mail@mail.mail" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label stacked>Сообщение</ion-label>
-                <ion-textarea [(ngModel)]="chosenParams.message" rows="8" required></ion-textarea>
+                <ion-textarea [(ngModel)]="chosenParams.message" rows="8"  placeholder="Текст запроса" required></ion-textarea>
             </ion-item>
         </ion-card-content>
     </ion-card>

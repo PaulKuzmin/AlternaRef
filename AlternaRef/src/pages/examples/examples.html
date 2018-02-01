@@ -14,8 +14,9 @@
 
     <ion-card *ngIf="isShowHint">
         <ion-card-content center text-center>
-            <p>Подберите код ТНВЭД ТС по описанию товара</p>
-            <p>или можете посмотреть описание товара по коду ТНВЭД ТС.</p>
+            <p>Не знаете код ТН ВЭД товара?</p>
+            <p>Подберите его по наименованию или описанию товара.</p>
+            <p>Или наоборот - найдите описание товара по его коду ТН ВЭД</p>
         </ion-card-content>
     </ion-card>
 
@@ -23,7 +24,7 @@
         <ion-card-content center text-center>
             <p>По вашему запросу ничего не найдено!</p>
             <p>Воспользуйтесь справочником</p>
-            <button ion-button (click)="goClick()">ТНВЭД ТС</button>
+            <button ion-button (click)="goClick()">ТН ВЭД</button>
         </ion-card-content>
     </ion-card>
 
@@ -40,7 +41,7 @@
                 <ion-col>
                     <button ion-button full icon-left small (click)="calcClick(item.code)">
                         <ion-icon name="cube"></ion-icon>
-                        <div>Калькулятор</div>
+                        <div>Рассчитать</div>
                     </button>
                 </ion-col>
             </ion-row>

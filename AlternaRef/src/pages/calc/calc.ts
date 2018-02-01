@@ -52,7 +52,7 @@ export class CalcPage {
     ionViewDidLoad() {
         this.isShowHint = !this.searchTerm.trim();
         this.setFilteredItems();
-        this.searchControl.valueChanges.debounceTime(1000).subscribe(search => {
+        this.searchControl.valueChanges.debounceTime(3000).subscribe(search => {
             this.searching = false;
             this.setFilteredItems();
         });
@@ -150,11 +150,11 @@ export class CalcPage {
     }
 
     tnvedClick() {
-        this.navCtrl.parent.select(0);
+        this.navCtrl.parent.select(3);
     }
 
     examplesClick() {
-        this.navCtrl.parent.select(3);
+        this.navCtrl.parent.select(2);
     }
 
     calcClick() {
