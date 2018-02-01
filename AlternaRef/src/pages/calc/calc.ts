@@ -6,6 +6,7 @@ import { LoadingController } from 'ionic-angular';
 import { CalcSource } from "../../providers/calcsource";
 import { FormControl } from '@angular/forms';
 import { CalcResultPage } from "../../pages/calcresult/calcresult";
+import { RedAlert } from "../../components/redalert";
 
 @Component({
     selector: 'page-calc',
@@ -39,7 +40,8 @@ export class CalcPage {
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
         public calcSource: CalcSource,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        public redAlert: RedAlert
     ) {
         this.searchControl = new FormControl();
 
@@ -87,7 +89,7 @@ export class CalcPage {
             this.calcSource.getParams(this.searchTerm.replace(' ', '_'), this.chosenParams).then(
                 data => {                    
                     this.params = data;
-                    console.log(this.params);
+                    //console.log(this.params);
 
                     if (!data.success || data.data.calc_info.length == 0) {
                         this.isShowHint = true;
@@ -130,7 +132,7 @@ export class CalcPage {
                             this.chosenParams[data.data.calc_params[key].code] = null;
                         }
                     }
-                    console.log(this.calcParams);
+                    //console.log(this.calcParams);
                     //console.log(this.chosenParams);
 
                     this.isShowHint = false;
@@ -141,7 +143,7 @@ export class CalcPage {
                     loaderIndicator.dismiss();
                 },
                 error => {
-                    console.error(error);
+                    this.redAlert.show(this.navCtrl, error);
                     loaderIndicator.dismiss();
                 });
         } else {
@@ -164,7 +166,7 @@ export class CalcPage {
         loaderIndicator.present();
         this.calcSource.getCalc(this.searchTerm, this.chosenParams).then(
             data => {
-                console.log(data);
+                //console.log(data);
                 if (data.success) {
                     if (data.data.calculation.success) {
                         this.navCtrl.push(CalcResultPage, {
@@ -189,7 +191,7 @@ export class CalcPage {
                 loaderIndicator.dismiss();
             },
             error => {
-                console.error(error);
+                this.redAlert.show(this.navCtrl, error);
                 loaderIndicator.dismiss();
             }
         );

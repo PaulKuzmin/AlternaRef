@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { ContactSource } from "../../providers/contactsource";
+import { RedAlert } from "../../components/redalert";
 
 @Component({
     selector: 'page-about',
@@ -15,7 +16,8 @@ export class AboutPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
-        public contactSource: ContactSource
+        public contactSource: ContactSource,
+        public redAlert: RedAlert
     ) { }
 
     ionViewDidLoad() {
@@ -30,7 +32,7 @@ export class AboutPage {
         this.contactSource.get().then(
             data => {
                 if (data.success) {
-                    console.log(data);
+                    //console.log(data);
                     if (data.data.length > 0) {
                         this.all = data.data;
                     }
@@ -38,7 +40,7 @@ export class AboutPage {
                 loaderIndicator.dismiss();
             },
             error => {
-                console.error(error);
+                this.redAlert.show(this.navCtrl, error);
                 loaderIndicator.dismiss();
             }
         );

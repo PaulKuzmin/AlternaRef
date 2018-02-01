@@ -65,6 +65,7 @@ var TnvedSource = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_examples_examples__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_calc_calc__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -81,12 +82,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var TnvCodePage = (function () {
-    function TnvCodePage(navCtrl, navParams, loadingCtrl, tnvedSource) {
+    function TnvCodePage(navCtrl, navParams, loadingCtrl, tnvedSource, redAlert) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loadingCtrl = loadingCtrl;
         this.tnvedSource = tnvedSource;
+        this.redAlert = redAlert;
         this.codeData = [];
         this.code = this.navParams.get("code");
     }
@@ -102,11 +105,11 @@ var TnvCodePage = (function () {
         });
         this.loaderIndicator.present();
         this.tnvedSource.getCode(code).then(function (data) {
-            console.log(data);
+            //console.log(data);
             _this.codeData = data;
             _this.loaderIndicator.dismiss();
         }, function (error) {
-            console.error(error);
+            _this.redAlert.show(_this.navCtrl, error);
             _this.loaderIndicator.dismiss();
         });
     };
@@ -115,7 +118,7 @@ var TnvCodePage = (function () {
         if (searchCode.indexOf('_') > 8) {
             searchCode = searchCode.substr(0, searchCode.indexOf('_'));
         }
-        console.log(searchCode);
+        //console.log(searchCode);
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_examples_examples__["a" /* ExamplesPage */], {
             text: searchCode
         });
@@ -129,12 +132,10 @@ var TnvCodePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-tnvcode',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\tnvcode\tnvcode.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>{{codeData?.code}}</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n    <ion-grid class="alt-title">\n\n        <ion-row>\n\n            <ion-col col-12><h5>{{codeData?.name}}</h5></ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n    <rate [data]="codeData?.data?.import_tax"></rate>\n\n    <rate [data]="codeData?.data?.export_tax"></rate>\n\n    <rate [data]="codeData?.data?.vat"></rate>\n\n    <rate [data]="codeData?.data?.excise"></rate>\n\n    <rate [data]="codeData?.data?.special"></rate>\n\n    <rate [data]="codeData?.data?.ensuring"></rate>\n\n\n\n    <ion-grid class="alt-title" [hidden]="!codeData?.data?.documents">\n\n        <ion-row>\n\n            <ion-col col-12>Документы и особенности</ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n    <document [data]="codeData?.data?.documents?.restrictions"></document>\n\n    <document [data]="codeData?.data?.documents?.license"></document>\n\n    <document [data]="codeData?.data?.documents?.certificates"></document>\n\n    <document [data]="codeData?.data?.documents?.others"></document>\n\n\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button full icon-left (click)="examplesClick()">\n\n                    <ion-icon name="paper"></ion-icon>\n\n                    <div>Примеры</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button full icon-left (click)="calcClick()">\n\n                    <ion-icon name="cube"></ion-icon>\n\n                    <div>Рассчитать</div>\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-toolbar>\n\n</ion-footer>'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\tnvcode\tnvcode.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__components_redalert__["a" /* RedAlert */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__components_redalert__["a" /* RedAlert */]) === "function" && _e || Object])
     ], TnvCodePage);
     return TnvCodePage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=tnvcode.js.map
@@ -154,6 +155,7 @@ var TnvCodePage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_tnvcode_tnvcode__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_calc_calc__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -171,12 +173,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ExamplesPage = (function () {
-    function ExamplesPage(navCtrl, navParams, examplesSource, loadingCtrl) {
+    function ExamplesPage(navCtrl, navParams, examplesSource, loadingCtrl, redAlert) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.examplesSource = examplesSource;
         this.loadingCtrl = loadingCtrl;
+        this.redAlert = redAlert;
         this.searchTerm = '';
         this.searching = false;
         this.isShowHint = true;
@@ -186,7 +190,6 @@ var ExamplesPage = (function () {
         if (text) {
             this.searchTerm = text;
         }
-        //this.navCtrl.parent.select(3);
     }
     ExamplesPage.prototype.ionViewDidLoad = function () {
         var _this = this;
@@ -207,7 +210,7 @@ var ExamplesPage = (function () {
             });
             loaderIndicator_1.present();
             this.examplesSource.getList(this.searchTerm).then(function (data) {
-                console.log(data);
+                //console.log(data);
                 _this.isShowHint = false;
                 if (!data.success || data.data.data.length == 0) {
                     _this.isShowNotFound = true;
@@ -218,7 +221,7 @@ var ExamplesPage = (function () {
                 _this.items = data.data.data;
                 loaderIndicator_1.dismiss();
             }, function (error) {
-                console.error(error);
+                _this.redAlert.show(_this.navCtrl, error);
                 loaderIndicator_1.dismiss();
             });
         }
@@ -227,7 +230,6 @@ var ExamplesPage = (function () {
             this.items = null;
             this.isShowNotFound = false;
         }
-        //console.log(this.isShowHint);
     };
     ExamplesPage.prototype.tnvedClick = function (code) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__pages_tnvcode_tnvcode__["a" /* TnvCodePage */], {
@@ -246,10 +248,10 @@ var ExamplesPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-examples',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\examples\examples.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Примеры декларирования</ion-title>\n\n    </ion-navbar>\n\n    <ion-toolbar>\n\n        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Описание или код..."></ion-searchbar>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-card *ngIf="isShowHint">\n\n        <ion-card-content center text-center>\n\n            <p>Не знаете код ТН ВЭД товара?</p>\n\n            <p>Подберите его по наименованию или описанию товара.</p>\n\n            <p>Или наоборот - найдите описание товара по его коду ТН ВЭД</p>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <ion-card *ngIf="isShowNotFound">\n\n        <ion-card-content center text-center>\n\n            <p>По вашему запросу ничего не найдено!</p>\n\n            <p>Воспользуйтесь справочником</p>\n\n            <button ion-button (click)="goClick()">ТН ВЭД</button>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <ion-list>\n\n        <ion-card *ngFor="let item of items">\n\n            <ion-card-content-collapsable [data]="item"></ion-card-content-collapsable>\n\n            <ion-row>\n\n                <ion-col>\n\n                    <button ion-button full icon-left small (click)="tnvedClick(item.code)">\n\n                        <ion-icon name="list"></ion-icon>\n\n                        <div>ТНВЭД</div>\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button full icon-left small (click)="calcClick(item.code)">\n\n                        <ion-icon name="cube"></ion-icon>\n\n                        <div>Рассчитать</div>\n\n                    </button>\n\n                </ion-col>\n\n            </ion-row>\n\n        </ion-card>\n\n    </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\examples\examples.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_examplessource__["a" /* ExamplesSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_examplessource__["a" /* ExamplesSource */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_examplessource__["a" /* ExamplesSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_examplessource__["a" /* ExamplesSource */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__components_redalert__["a" /* RedAlert */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__components_redalert__["a" /* RedAlert */]) === "function" && _e || Object])
     ], ExamplesPage);
     return ExamplesPage;
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=examples.js.map
@@ -345,6 +347,7 @@ var TabsPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tnvcode_tnvcode__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -360,12 +363,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = (function () {
-    function HomePage(navParams, navCtrl, loadingCtrl, tnvedSource) {
+    function HomePage(navParams, navCtrl, loadingCtrl, tnvedSource, redAlert) {
         this.navParams = navParams;
         this.navCtrl = navCtrl;
         this.loadingCtrl = loadingCtrl;
         this.tnvedSource = tnvedSource;
+        this.redAlert = redAlert;
         this.nodes = [];
         this.isShowFooter = false;
         this.id = 0;
@@ -408,7 +413,7 @@ var HomePage = (function () {
             _this.nodes = data.nodes;
             _this.loaderIndicator.dismiss();
         }, function (error) {
-            console.error(error);
+            _this.redAlert.show(_this.navCtrl, error);
             _this.loaderIndicator.dismiss();
         });
     };
@@ -417,13 +422,10 @@ var HomePage = (function () {
             selector: 'page-home',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\home\home.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>ТН ВЭД</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <ion-card *ngFor="let node of nodes" (click)="nodeOnClick(node)">\n\n            <ion-card-header>\n\n\n\n                <ion-row justify-content-around>\n\n                    <ion-col col-11>\n\n                        <span item-left>{{node.kod}} {{node.kodplus}}</span>\n\n                    </ion-col>\n\n                    <ion-col col-1>\n\n                        <span item-right><ion-icon name="arrow-forward"></ion-icon></span>\n\n                    </ion-col>\n\n                </ion-row>\n\n                    \n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                {{node.name}}\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </ion-list>\n\n</ion-content>\n\n\n\n<!--\n\n<ion-footer [hidden]="!isShowFooter">\n\n    <ion-toolbar>\n\n        <ion-row>\n\n            <ion-col>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button full outline icon-left (click)="goTop()">\n\n                    <ion-icon name="md-arrow-up"></ion-icon>\n\n                    <div>В начало</div>\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-toolbar>\n\n</ion-footer>\n\n-->\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\home\home.html"*/,
             providers: [__WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */]]
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_tnvedsource__["a" /* TnvedSource */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4__components_redalert__["a" /* RedAlert */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__components_redalert__["a" /* RedAlert */]) === "function" && _e || Object])
     ], HomePage);
     return HomePage;
-    var HomePage_1;
+    var HomePage_1, _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -690,6 +692,7 @@ var MailSource = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_autocalcsource__ = __webpack_require__(211);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_autocalcresult_autocalcresult__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -706,13 +709,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AutoCalcPage = (function () {
-    function AutoCalcPage(navCtrl, navParams, loadingCtrl, autoCalcSource, alertCtrl) {
+    function AutoCalcPage(navCtrl, navParams, loadingCtrl, autoCalcSource, alertCtrl, redAlert) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loadingCtrl = loadingCtrl;
         this.autoCalcSource = autoCalcSource;
         this.alertCtrl = alertCtrl;
+        this.redAlert = redAlert;
         this.months = [
             { id: 1, name: "Январь" },
             { id: 2, name: "Февраль" },
@@ -749,7 +754,7 @@ var AutoCalcPage = (function () {
         });
         loaderIndicator.present();
         this.autoCalcSource.getParams(this.chosenParams.vehicle, this.chosenParams).then(function (data) {
-            console.log(data);
+            //console.log(data);
             _this.calcParams = data.data;
             for (var i = 0; i < _this.calcParams.calc_params.length; i++) {
                 if (!_this.chosenParams[_this.calcParams.calc_params[i].code]) {
@@ -764,7 +769,7 @@ var AutoCalcPage = (function () {
             //console.log(this.chosenParams);
             loaderIndicator.dismiss();
         }, function (error) {
-            console.error(error);
+            _this.redAlert.show(_this.navCtrl, error);
             loaderIndicator.dismiss();
         });
     };
@@ -775,7 +780,7 @@ var AutoCalcPage = (function () {
         });
         loaderIndicator.present();
         this.autoCalcSource.getCalc(this.chosenParams.vehicle, this.chosenParams).then(function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.success) {
                 if ((data.data.calculation.hasOwnProperty("F") && data.data.calculation.F.hasOwnProperty("success") && data.data.calculation.F.success) ||
                     (data.data.calculation.U.hasOwnProperty("success") && data.data.calculation.U.success)) {
@@ -795,19 +800,19 @@ var AutoCalcPage = (function () {
                             msg += data.data.calculation.U.messages[i].message + '<br>';
                         }
                     }
-                    var alert_1 = _this.alertCtrl.create({
+                    var alert = _this.alertCtrl.create({
                         title: 'Ошибка',
                         subTitle: msg,
                         buttons: ['OK']
                     });
-                    alert_1.present();
+                    alert.present();
                 }
             }
             else {
             }
             loaderIndicator.dismiss();
         }, function (error) {
-            console.error(error);
+            _this.redAlert.show(_this.navCtrl, error);
             loaderIndicator.dismiss();
         });
     };
@@ -815,13 +820,10 @@ var AutoCalcPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-autocalc',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\autocalc\autocalc.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Калькулятор авто</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n    <ion-card>\n\n        <ion-item>\n\n            <ion-label stacked>Тип авто</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.vehicle" cancelText="Отмена" interface="alert" (ionChange)="getParams()">\n\n                <ion-option value="car">ЛЕГКОВОЙ</ion-option>\n\n                <ion-option value="cargo">ГРУЗОВОЙ</ion-option>\n\n                <ion-option value="bus">АВТОБУС</ion-option>\n\n                <!--\n\n                <ion-option value="bike">МОТОЦИКЛ/МОПЕД</ion-option>\n\n                <ion-option value="tractor">ТЯГАЧ</ion-option>\n\n                <ion-option value="crane">АВТОКРАН</ion-option>\n\n                <ion-option value="quadrocicle">КВАДРОЦИКЛ</ion-option>\n\n                <ion-option value="concretemixer">БЕТОНОМЕШАЛКА</ion-option>\n\n                <ion-option value="driving">АВТОБУРОВАЯ</ion-option>\n\n                <ion-option value="evacuator">ЭВАКУАТОР</ion-option>\n\n                <ion-option value="concretepump">БЕТОНОНАСОС</ion-option>\n\n                <ion-option value="snowmobile">СНЕГОХОД</ion-option>\n\n                <ion-option value="caravan">АВТОПРИЦЕП</ion-option>\n\n                <ion-option value="house">ДОМ-АВТОПРИЦЕП</ion-option>\n\n                <ion-option value="waterbike">ВОДНЫЙ МОТОЦИКЛ</ion-option>\n\n                <ion-option value="boat">КАТЕР (ЯХТА,ЛОДКА)</ion-option>\n\n                -->\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Месяц выпуска</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.month" cancelText="Отмена" interface="alert">\n\n                <ion-option *ngFor="let m of months" [value]="m.id">{{m.name}}</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Год выпуска</ion-label>\n\n            <ion-select class="max-width" [(ngModel)]="chosenParams.year" cancelText="Отмена" interface="alert">\n\n                <ion-option *ngFor="let y of years" [value]="y">{{y}}</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked>Стоимость</ion-label>\n\n            <ion-input [(ngModel)]="chosenParams.cost" placeholder="дол. США" min="0"></ion-input>\n\n        </ion-item>\n\n        <ion-item *ngFor="let p of calcParams?.calc_params">\n\n            <ion-label stacked>{{p.name}}<!--<span *ngIf="p.dimension">, {{p.dimension}}</span>--></ion-label>\n\n            <ion-select class="max-width" *ngIf="p.code==\'engine\'" [(ngModel)]="chosenParams[p.code]" cancelText="Отмена" interface="alert">\n\n                <ion-option *ngFor="let e of calcParams?.calc_engines" [value]="e.id">{{e.name}}</ion-option>\n\n            </ion-select>\n\n            <ion-input *ngIf="p.code!=\'engine\'" [(ngModel)]="chosenParams[p.code]" [placeholder]="p.dimension" min="0"></ion-input>\n\n        </ion-item>\n\n    </ion-card>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <button block ion-button icon-left (click)="calcClick()">\n\n            <ion-icon name="calculator"></ion-icon>\n\n            Рассчитать\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\autocalc\autocalc.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_autocalcsource__["a" /* AutoCalcSource */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_autocalcsource__["a" /* AutoCalcSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_autocalcsource__["a" /* AutoCalcSource */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__components_redalert__["a" /* RedAlert */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__components_redalert__["a" /* RedAlert */]) === "function" && _f || Object])
     ], AutoCalcPage);
     return AutoCalcPage;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=autocalc.js.map
@@ -942,7 +944,7 @@ var AutoCalcResultPage = (function () {
     AutoCalcResultPage.prototype.requestClick = function () {
         var message = '';
         if (this.data && this.data.hasOwnProperty("chosen") && this.data.chosen) {
-            console.log(this.data.chosen);
+            //console.log(this.data.chosen);
             var engines = {
                 f: 'бензиновый',
                 d: 'дизельный',
@@ -989,7 +991,7 @@ var AutoCalcResultPage = (function () {
             if (this.data.chosen.cost) {
                 message += '; стоимость, дол.США: ' + this.data.chosen.cost;
             }
-            console.log(message);
+            //console.log(message);
         }
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__pages_request_request__["a" /* RequestPage */], { message: message });
     };
@@ -997,11 +999,10 @@ var AutoCalcResultPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-autocalcresult',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\autocalcresult\autocalcresult.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Результат расчета</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-segment [(ngModel)]="calcCurrs">\n\n        <ion-segment-button value="rubles">\n\n            В рублях\n\n        </ion-segment-button>\n\n        <ion-segment-button value="dollars">\n\n            В дол.США\n\n        </ion-segment-button>\n\n    </ion-segment>\n\n\n\n    <div [ngSwitch]="calcCurrs">\n\n        <ion-card *ngIf="data?.calculation?.F?.success">\n\n            <ion-card-header>\n\n                <ion-grid>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Физ.лицо, итого\n\n                        </ion-col>\n\n                        <ion-col text-right *ngSwitchCase="\'rubles\'">\n\n                            {{data.calculation.F.payments_summa_rub | number:\'3.2-2\'}}\n\n                        </ion-col>\n\n                        <ion-col text-right *ngSwitchCase="\'dollars\'">\n\n                            {{data.calculation.F.payments_summa_usd | number:\'3.2-2\'}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                <ion-grid>\n\n                    <ion-row *ngFor="let p of data.calculation.F.payments">\n\n                        <ion-col col-7 class="alt-rate-name">\n\n                            {{p.name}} <span class="alt-rate-hint" (click)="showRateHint(p.name,p.rate)">&nbsp;?&nbsp;</span>\n\n                        </ion-col>\n\n                        <ion-col col-5 text-right *ngSwitchCase="\'rubles\'">\n\n                            {{p.summa_rub | number:\'2.2-2\'}}\n\n                        </ion-col>\n\n                        <ion-col col-5 text-right *ngSwitchCase="\'dollars\'">\n\n                            {{p.summa_usd | number:\'2.2-2\'}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </ion-card-content>\n\n        </ion-card>\n\n\n\n        <ion-card *ngIf="data?.calculation?.U?.success">\n\n            <ion-card-header>\n\n                <ion-grid>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Юр.лицо, итого\n\n                        </ion-col>\n\n                        <ion-col text-right *ngSwitchCase="\'rubles\'">\n\n                            {{data.calculation.U.payments_summa_rub | number:\'3.2-2\'}}\n\n                        </ion-col>\n\n                        <ion-col text-right *ngSwitchCase="\'dollars\'">\n\n                            {{data.calculation.U.payments_summa_usd | number:\'3.2-2\'}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                <ion-grid>\n\n                    <ion-row *ngFor="let p of data.calculation.U.payments">\n\n                        <ion-col col-7 class="alt-rate-name">\n\n                            {{p.name}} <span class="alt-rate-hint" (click)="showRateHint(p.name,p.rate)">&nbsp;?&nbsp;</span>\n\n                        </ion-col>\n\n                        <ion-col col-5 text-right *ngSwitchCase="\'rubles\'">\n\n                            {{p.summa_rub | number:\'2.2-2\'}}\n\n                        </ion-col>\n\n                        <ion-col col-5 text-right *ngSwitchCase="\'dollars\'">\n\n                            {{p.summa_usd | number:\'2.2-2\'}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </div>\n\n\n\n    <accordion title="Курсы валют" [hidden]="!currencies">\n\n        <ion-grid>\n\n            <ion-row *ngFor="let c of currencies">\n\n                <ion-col>\n\n                    {{c.name}}\n\n                </ion-col>\n\n                <ion-col text-right>\n\n                    {{c.value | number:\'2.4-4\'}}\n\n                </ion-col>\n\n            </ion-row>\n\n        </ion-grid>\n\n    </accordion>\n\n\n\n    <ion-card>\n\n        <ion-card-content>\n\n            <div id="challengeID">\n\n                <p>Дорого?</p>\n\n                <p>Отправьте запрос и получите индивидуальный расчет!</p>\n\n            </div>\n\n        </ion-card-content>\n\n    </ion-card>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <button block ion-button icon-left (click)="requestClick()">\n\n            <ion-icon name="send"></ion-icon>\n\n            Отправить запрос\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\autocalcresult\autocalcresult.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object])
     ], AutoCalcResultPage);
     return AutoCalcResultPage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=autocalcresult.js.map
@@ -1019,6 +1020,7 @@ var AutoCalcResultPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_rxjs_add_operator_debounceTime__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1034,12 +1036,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RoisPage = (function () {
-    function RoisPage(navCtrl, navParams, oisSource, loadingCtrl) {
+    function RoisPage(navCtrl, navParams, oisSource, loadingCtrl, redAlert) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.oisSource = oisSource;
         this.loadingCtrl = loadingCtrl;
+        this.redAlert = redAlert;
         this.searchTerm = '';
         this.searching = false;
         this.isShowHint = true;
@@ -1059,7 +1063,7 @@ var RoisPage = (function () {
     };
     RoisPage.prototype.setFilteredItems = function () {
         var _this = this;
-        console.log(this.isShowHint);
+        //console.log(this.isShowHint);
         if (this.searchTerm.length > 0) {
             var loaderIndicator_1 = this.loadingCtrl.create({
                 content: "Загрузка..."
@@ -1080,7 +1084,7 @@ var RoisPage = (function () {
                 }
                 loaderIndicator_1.dismiss();
             }, function (error) {
-                console.error(error);
+                _this.redAlert.show(_this.navCtrl, error);
                 loaderIndicator_1.dismiss();
             });
         }
@@ -1095,10 +1099,10 @@ var RoisPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-rois',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\rois\rois.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Реестр объектов интеллектуальной собственности</ion-title>\n\n    </ion-navbar>\n\n    <ion-toolbar>\n\n        <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Наименование..."></ion-searchbar>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content padding>    \n\n\n\n    <ion-card *ngIf="isShowHint">\n\n        <ion-card-content center text-center>\n\n            <p>Проверьте, находится ли торговая марка вашего товара в реестре объектов интеллектуальной собственности</p>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <ion-card *ngIf="isShowNotFound">\n\n        <ion-card-content center text-center>\n\n            <p>По вашему запросу ничего не найдено!</p>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <ion-list>\n\n        <ion-card *ngFor="let item of items">\n\n            <ion-card-header>\n\n                {{labels.regnom}}\n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                {{item.regnom}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.g31_12">\n\n                {{labels.g31_12}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.g31_12">\n\n                {{item.g31_12}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.note">\n\n                {{labels.note}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.note">\n\n                {{item.note}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.document">\n\n                {{labels.document}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.document">\n\n                {{item.document}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.name">\n\n                {{labels.name}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.name">\n\n                {{item.name}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.namet">\n\n                {{labels.namet}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.namet">\n\n                {{item.namet}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.agent">\n\n                {{labels.agent}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.agent">\n\n                {{item.agent}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.mktu">\n\n                {{labels.mktu}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.mktu">\n\n                {{item.mktu}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.dateend">\n\n                {{labels.dateend}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.dateend">\n\n                {{item.dateend}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.comm">\n\n                {{labels.comm}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.comm">\n\n                {{item.comm}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.letter">\n\n                {{labels.letter}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.letter">\n\n                {{item.letter}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-header *ngIf="item.g33">\n\n                {{labels.g33}}\n\n            </ion-card-header>\n\n            <ion-card-content *ngIf="item.g33">\n\n                {{item.g33}}\n\n            </ion-card-content>\n\n\n\n            <ion-card-content *ngIf="item.image">\n\n                <div class="rois-image" [style.background-image]="\'url(https://alterna.ltd/img/ois/\'+item.image+\')\'"></div>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\rois\rois.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_oissource__["a" /* OisSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_oissource__["a" /* OisSource */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_oissource__["a" /* OisSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_oissource__["a" /* OisSource */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_5__components_redalert__["a" /* RedAlert */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__components_redalert__["a" /* RedAlert */]) === "function" && _e || Object])
     ], RoisPage);
     return RoisPage;
-    var _a, _b, _c, _d;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=rois.js.map
@@ -1165,6 +1169,7 @@ var OisSource = (function (_super) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_contactsource__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1178,12 +1183,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AboutPage = (function () {
-    function AboutPage(navCtrl, navParams, loadingCtrl, contactSource) {
+    function AboutPage(navCtrl, navParams, loadingCtrl, contactSource, redAlert) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loadingCtrl = loadingCtrl;
         this.contactSource = contactSource;
+        this.redAlert = redAlert;
     }
     AboutPage.prototype.ionViewDidLoad = function () {
         this.getContacts();
@@ -1196,14 +1203,14 @@ var AboutPage = (function () {
         loaderIndicator.present();
         this.contactSource.get().then(function (data) {
             if (data.success) {
-                console.log(data);
+                //console.log(data);
                 if (data.data.length > 0) {
                     _this.all = data.data;
                 }
             }
             loaderIndicator.dismiss();
         }, function (error) {
-            console.error(error);
+            _this.redAlert.show(_this.navCtrl, error);
             loaderIndicator.dismiss();
         });
     };
@@ -1211,12 +1218,10 @@ var AboutPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-about',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\about\about.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>О компании</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n    <ion-card>\n\n        <div class="contacts-logo"></div>\n\n        <ion-card-content>\n\n            <ion-grid>\n\n                <ion-row>\n\n                    <ion-col col-12 class="alt-label">\n\n                        <ion-icon name="call"></ion-icon> Телефоны: \n\n                    </ion-col>\n\n                </ion-row>\n\n                <ion-row>\n\n                    <ion-col col-12>\n\n                        <a href="tel: +74959090513">\n\n                            +7 (495) 909-05-13\n\n                        </a>\n\n                    </ion-col>\n\n                    <ion-col col-12>\n\n                        <a href="tel: +74232650983">\n\n                            +7 (423) 265-09-83\n\n                        </a>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n            <ion-grid>\n\n                <ion-row>\n\n                    <ion-col col-12 class="alt-label">\n\n                        <ion-icon name="mail"></ion-icon> Email:\n\n                    </ion-col>\n\n                </ion-row>\n\n                <ion-row>\n\n                    <ion-col col-12>\n\n                        <a href="mailto:alternadv@gmail.com">\n\n                            alternadv@gmail.com\n\n                        </a>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n            <ion-grid>\n\n                <ion-row>\n\n                    <ion-col col-12 class="alt-label">\n\n                        <ion-icon name="globe"></ion-icon> Web:\n\n                    </ion-col>\n\n                </ion-row>\n\n                <ion-row>\n\n                    <ion-col col-12>\n\n                        <a href="https://alterna.ltd/">\n\n                            https://alterna.ltd/\n\n                        </a>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n            <p>\n\n                Транспортно-логистическая компания «Альтерна» - таможенный представитель с многолетним успешным опытом работы в сфере ВЭД. \n\n                Мы занимаемся таможенным оформлением и доставкой грузов любой категории из всех стран Азии (Китай, Корея, Япония и т.д.) в Россию.\n\n            </p>\n\n        </ion-card-content>\n\n    </ion-card>\n\n    <ion-card *ngFor="let a of all">\n\n        <ion-card-title>\n\n            {{a.short_name}}\n\n        </ion-card-title>\n\n        <ion-card-content>\n\n            <ion-grid>\n\n                <ion-row>\n\n                    <ion-col col-12 class="alt-label">\n\n                        <ion-icon name="navigate"></ion-icon> Адрес:\n\n                    </ion-col>\n\n                </ion-row>\n\n                <ion-row>\n\n                    <ion-col col-12>\n\n                        {{a.address}}\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n            <ion-grid>\n\n                <ion-row>\n\n                    <ion-col col-12 class="alt-label">\n\n                        <ion-icon name="call"></ion-icon> Телефоны:\n\n                    </ion-col>\n\n                </ion-row>\n\n                <ion-row *ngFor="let p of a.contacts.phones1">\n\n                    <ion-col col-12>\n\n                        <a href="tel: +74959090513">\n\n                            {{p}}\n\n                        </a>\n\n                    </ion-col>\n\n                </ion-row>\n\n                <ion-row *ngFor="let p of a.contacts.phones2">\n\n                    <ion-col col-12>\n\n                        <a href="tel: +74959090513">\n\n                            {{p}}\n\n                        </a>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n            <ion-grid>\n\n                <ion-row>\n\n                    <ion-col col-12 class="alt-label">\n\n                        <ion-icon name="mail"></ion-icon> Email:\n\n                    </ion-col>\n\n                </ion-row>\n\n                <ion-row *ngFor="let e of a.contacts.emails">\n\n                    <ion-col col-12>\n\n                        <a href="mailto:{{e}}">\n\n                            {{e}}\n\n                        </a>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-grid>\n\n        </ion-card-content>\n\n    </ion-card>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\about\about.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_contactsource__["a" /* ContactSource */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_contactsource__["a" /* ContactSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_contactsource__["a" /* ContactSource */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3__components_redalert__["a" /* RedAlert */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__components_redalert__["a" /* RedAlert */]) === "function" && _e || Object])
     ], AboutPage);
     return AboutPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=about.js.map
@@ -1324,12 +1329,14 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_rate_rate__ = __webpack_require__(301);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_document_document__ = __webpack_require__(302);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_ion_card_content_collapsable_ion_card_content_collapsable__ = __webpack_require__(303);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_30__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1416,6 +1423,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_19__providers_autocalcsource__["a" /* AutoCalcSource */],
                 __WEBPACK_IMPORTED_MODULE_22__providers_mailsource__["a" /* MailSource */],
                 __WEBPACK_IMPORTED_MODULE_23__providers_contactsource__["a" /* ContactSource */],
+                __WEBPACK_IMPORTED_MODULE_30__components_redalert__["a" /* RedAlert */],
                 { provide: __WEBPACK_IMPORTED_MODULE_2__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["c" /* IonicErrorHandler */] }
             ]
         })
@@ -1452,10 +1460,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var DataSource = (function () {
+    //readonly endpoint = '/api/';
     function DataSource(http) {
         this.http = http;
-        //readonly endpoint = 'https://alterna.ltd/';
-        this.endpoint = '/api/';
+        this.endpoint = 'https://alterna.ltd/';
     }
     DataSource.prototype.getCurrent = function (url) {
         var requestUrl = this.endpoint + url;
@@ -1465,7 +1473,7 @@ var DataSource = (function () {
         else {
             requestUrl += '?json=true';
         }
-        console.log(requestUrl);
+        //console.log(requestUrl);
         return this.http.get(requestUrl)
             .toPromise()
             .then(this.extractData)
@@ -1486,8 +1494,8 @@ var DataSource = (function () {
                 params.set(key, query_params[key]);
             }
         }
-        console.log(requestUrl);
-        console.log(query_params);
+        //console.log(requestUrl);
+        //console.log(query_params);
         return this.http.post(requestUrl, query_params)
             .toPromise()
             .then(this.extractData)
@@ -1504,9 +1512,10 @@ var DataSource = (function () {
     };
     DataSource = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
     ], DataSource);
     return DataSource;
+    var _a;
 }());
 
 //# sourceMappingURL=datasource.js.map
@@ -1786,6 +1795,72 @@ var IonCardContentCollapsableComponent = (function () {
 
 /***/ }),
 
+/***/ 304:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RedAlert; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var RedAlert = (function () {
+    function RedAlert(alertCtrl) {
+        this.alertCtrl = alertCtrl;
+    }
+    RedAlert.prototype.showConnectionErrorAlert = function (navCtrl) {
+        var alert = this.alertCtrl.create({
+            title: 'Нет соединения с сервером',
+            message: 'Проверьте, пожалуйста, подключение к интернету!',
+            buttons: [
+                {
+                    text: 'Повторить',
+                    handler: function (data) {
+                        navCtrl.setRoot(navCtrl.getActive().component);
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    RedAlert.prototype.showServerErrorAlert = function () {
+        var alert = this.alertCtrl.create({
+            title: 'Ошибка',
+            message: 'Произошла ошибка при получении данных. Приносим свои извинения!',
+            buttons: ['ОК']
+        });
+        alert.present();
+    };
+    RedAlert.prototype.show = function (navCtrl, response) {
+        console.error(response);
+        if (response && response.status == 0) {
+            this.showConnectionErrorAlert(navCtrl);
+        }
+        else {
+            this.showServerErrorAlert();
+        }
+    };
+    RedAlert = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _a || Object])
+    ], RedAlert);
+    return RedAlert;
+    var _a;
+}());
+
+//# sourceMappingURL=redalert.js.map
+
+/***/ }),
+
 /***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1796,6 +1871,7 @@ var IonCardContentCollapsableComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_calcsource__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_calcresult_calcresult__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1813,13 +1889,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var CalcPage = (function () {
-    function CalcPage(navCtrl, navParams, loadingCtrl, calcSource, alertCtrl) {
+    function CalcPage(navCtrl, navParams, loadingCtrl, calcSource, alertCtrl, redAlert) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loadingCtrl = loadingCtrl;
         this.calcSource = calcSource;
         this.alertCtrl = alertCtrl;
+        this.redAlert = redAlert;
         this.searchTerm = ''; //'2402209000';
         this.searching = false;
         this.countrySelectOptions = {
@@ -1873,7 +1951,7 @@ var CalcPage = (function () {
             loaderIndicator_1.present();
             this.calcSource.getParams(this.searchTerm.replace(' ', '_'), this.chosenParams).then(function (data) {
                 _this.params = data;
-                console.log(_this.params);
+                //console.log(this.params);
                 if (!data.success || data.data.calc_info.length == 0) {
                     _this.isShowHint = true;
                     loaderIndicator_1.dismiss();
@@ -1913,14 +1991,14 @@ var CalcPage = (function () {
                         _this.chosenParams[data.data.calc_params[key].code] = null;
                     }
                 }
-                console.log(_this.calcParams);
+                //console.log(this.calcParams);
                 //console.log(this.chosenParams);
                 _this.isShowHint = false;
                 _this.isShowCalc = true;
                 _this.getStatsPrice(data.data.tnved_code);
                 loaderIndicator_1.dismiss();
             }, function (error) {
-                console.error(error);
+                _this.redAlert.show(_this.navCtrl, error);
                 loaderIndicator_1.dismiss();
             });
         }
@@ -1941,7 +2019,7 @@ var CalcPage = (function () {
         });
         loaderIndicator.present();
         this.calcSource.getCalc(this.searchTerm, this.chosenParams).then(function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.success) {
                 if (data.data.calculation.success) {
                     _this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__pages_calcresult_calcresult__["a" /* CalcResultPage */], {
@@ -1965,7 +2043,7 @@ var CalcPage = (function () {
             }
             loaderIndicator.dismiss();
         }, function (error) {
-            console.error(error);
+            _this.redAlert.show(_this.navCtrl, error);
             loaderIndicator.dismiss();
         });
     };
@@ -1982,10 +2060,10 @@ var CalcPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-calc',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calc\calc.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Калькулятор товаров</ion-title>\n\n    </ion-navbar>\n\n    <ion-toolbar id="searchToolbarID">\n\n        <ion-searchbar type="tel" [(ngModel)]="searchTerm" [formControl]="searchControl" (ionInput)="onSearchInput()" placeholder="Введите код ТН ВЭД..."></ion-searchbar>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-card *ngIf="isShowHint">\n\n        <ion-card-content center text-center>\n\n            <p>Не нашли или не знаете код?</p>\n\n            <p>Воспользуйтесь справочником:</p>\n\n            <button ion-button (click)="tnvedClick()">ТН ВЭД</button>\n\n            <p>или подберите код, используя </p>\n\n            <button ion-button (click)="examplesClick()">примеры декларирования</button>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <ion-card *ngIf="isShowHint">\n\n        <ion-card-content center text-center>\n\n            <p>Справочник ТН ВЭД поможет вам точно подобрать код ТН ВЭД, а также получить дополнительную информацию по товару. В частности, в справочнике вы быстро найдете сведения о размерах ставок импортных и экспортных пошлины, акцизов, НДС и других платежей.</p>\n\n        </ion-card-content>\n\n    </ion-card>\n\n\n\n    <div *ngIf="isShowCalc" style="padding-bottom: 50px;">\n\n        \n\n        <ion-grid class="alt-title">\n\n            <ion-row>\n\n                <ion-col col-12><h5>{{params?.data?.calc_info?.name}}</h5></ion-col>\n\n            </ion-row>\n\n        </ion-grid>\n\n\n\n        <ion-card>\n\n            <ion-item>\n\n                <ion-label stacked>Направление перемещения</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams.direction" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">\n\n                    <ion-option value="I">Импорт</ion-option>\n\n                    <ion-option value="E">Экспорт</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Страна</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams.country" interface="alert" cancelText="Отмена" [selectOptions]="countrySelectOptions" (ionChange)="setFilteredItems()" (ionFocus)="checkFocus()">\n\n                    <ion-option *ngFor="let c of params?.data?.countries" [value]="c.code">{{c.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Стоимость</ion-label>\n\n                <ion-input [(ngModel)]="chosenParams.param_cost" type="tel" min="0" placeholder="дол. США"></ion-input>\n\n            </ion-item>\n\n            <!--variable-->\n\n            <ion-item *ngFor="let p of calcParams">\n\n                <ion-label stacked>{{p.name}}</ion-label>\n\n                <ion-input [(ngModel)]="chosenParams[p.code]" type="tel" min="0" placeholder="{{p.dimension}}"></ion-input>\n\n            </ion-item>\n\n        </ion-card>\n\n\n\n        <ion-grid class="alt-title" *ngIf="specialParams">\n\n            <ion-row>\n\n                <ion-col col-12>Особые условия</ion-col>\n\n            </ion-row>\n\n        </ion-grid>\n\n\n\n        <ion-card>\n\n            <!--special-->\n\n            <ion-item *ngFor="let sp of specialParams">\n\n                <ion-label stacked>{{sp.type_name}}</ion-label>\n\n                <ion-select class="max-width" [(ngModel)]="chosenParams[sp.type]" cancelText="Отмена" interface="action-sheet" (ionChange)="setFilteredItems()">\n\n                    <ion-option *ngFor="let spd of sp?.data" [value]="spd.id">{{spd.name}}</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n        </ion-card>\n\n\n\n        <ion-grid class="alt-title" *ngIf="statsPrice">\n\n            <ion-row>\n\n                <ion-col col-12>Среднеконтрактные цены, $/кг</ion-col>\n\n            </ion-row>\n\n        </ion-grid>\n\n\n\n        <ion-card *ngIf="statsPrice">\n\n            <ion-card-content>\n\n                <ion-grid>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Минимум\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.minimum}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Средняя\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.average}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                    <ion-row>\n\n                        <ion-col>\n\n                            Максимум\n\n                        </ion-col>\n\n                        <ion-col text-right>\n\n                            {{statsPrice?.maximum}}\n\n                        </ion-col>\n\n                    </ion-row>\n\n                </ion-grid>\n\n                <p class="alt-hint">* Данные за полгода</p>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </div>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar *ngIf="isShowCalc">\n\n        <button block ion-button icon-left (click)="calcClick()">\n\n            <ion-icon name="calculator"></ion-icon>\n\n            Рассчитать\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\calc\calc.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_calcsource__["a" /* CalcSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_calcsource__["a" /* CalcSource */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_calcsource__["a" /* CalcSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_calcsource__["a" /* CalcSource */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_5__components_redalert__["a" /* RedAlert */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__components_redalert__["a" /* RedAlert */]) === "function" && _f || Object])
     ], CalcPage);
     return CalcPage;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=calc.js.map
@@ -2000,6 +2078,7 @@ var CalcPage = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_mailsource__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_redalert__ = __webpack_require__(304);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2014,13 +2093,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RequestPage = (function () {
-    function RequestPage(navCtrl, navParams, loadingCtrl, mailSource, alertCtrl) {
+    function RequestPage(navCtrl, navParams, loadingCtrl, mailSource, alertCtrl, redAlert) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loadingCtrl = loadingCtrl;
         this.mailSource = mailSource;
         this.alertCtrl = alertCtrl;
+        this.redAlert = redAlert;
         this.chosenParams = {
             name: "",
             phone: "",
@@ -2065,7 +2146,7 @@ var RequestPage = (function () {
         });
         loaderIndicator.present();
         this.mailSource.sendRequest(this.chosenParams).then(function (data) {
-            console.log(data);
+            //console.log(data);
             if (data.success) {
                 _this.chosenParams.name = "";
                 _this.chosenParams.phone = "";
@@ -2073,16 +2154,16 @@ var RequestPage = (function () {
                 _this.chosenParams.message = "";
             }
             else {
-                var alert_1 = _this.alertCtrl.create({
+                var alert = _this.alertCtrl.create({
                     title: 'Ошибка',
                     subTitle: data.data,
                     buttons: ['OK']
                 });
-                alert_1.present();
+                alert.present();
             }
             loaderIndicator.dismiss();
         }, function (error) {
-            console.error(error);
+            _this.redAlert.show(_this.navCtrl, error);
             loaderIndicator.dismiss();
         });
     };
@@ -2090,13 +2171,10 @@ var RequestPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-request',template:/*ion-inline-start:"C:\Workplace\AlternaRef\AlternaRef\src\pages\request\request.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n            <ion-icon name="menu"></ion-icon>\n\n        </button>\n\n        <ion-title>Запрос</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-card>\n\n        <ion-card-content>\n\n            <ion-item>\n\n                <ion-label stacked>Имя</ion-label>\n\n                <ion-input [(ngModel)]="chosenParams.name" type="email" placeholder="Иван Иванов" required></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Телефон</ion-label>\n\n                <ion-input [(ngModel)]="chosenParams.phone" type="tel" placeholder="89876543210" required></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Email</ion-label>\n\n                <ion-input [(ngModel)]="chosenParams.email" type="text" placeholder="mail@mail.mail" required></ion-input>\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label stacked>Сообщение</ion-label>\n\n                <ion-textarea [(ngModel)]="chosenParams.message" rows="8"  placeholder="Текст запроса" required></ion-textarea>\n\n            </ion-item>\n\n        </ion-card-content>\n\n    </ion-card>\n\n</ion-content>\n\n\n\n<ion-footer no-border>\n\n    <ion-toolbar>\n\n        <button block ion-button icon-left (click)="sendClick()">\n\n            <ion-icon name="send"></ion-icon>\n\n            Отправить\n\n        </button>\n\n    </ion-toolbar>\n\n</ion-footer>\n\n'/*ion-inline-end:"C:\Workplace\AlternaRef\AlternaRef\src\pages\request\request.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_mailsource__["a" /* MailSource */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__providers_mailsource__["a" /* MailSource */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_mailsource__["a" /* MailSource */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_3__components_redalert__["a" /* RedAlert */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__components_redalert__["a" /* RedAlert */]) === "function" && _f || Object])
     ], RequestPage);
     return RequestPage;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=request.js.map

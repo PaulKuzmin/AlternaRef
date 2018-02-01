@@ -4,6 +4,7 @@ import { NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { TnvedSource } from "../../providers/tnvedsource";
 import { TnvCodePage } from "../tnvcode/tnvcode";
+import { RedAlert } from "../../components/redalert";
 
 @Component({
   selector: 'page-home',
@@ -21,7 +22,8 @@ export class HomePage {
         public navParams: NavParams,
         public navCtrl: NavController,
         public loadingCtrl: LoadingController,
-        public tnvedSource: TnvedSource
+        public tnvedSource: TnvedSource,
+        public redAlert: RedAlert
     ) {
         this.id = navParams.get('id') && navParams.get('id') || 0;        
     }
@@ -68,7 +70,7 @@ export class HomePage {
                 this.loaderIndicator.dismiss();
             },
             error => {
-                console.error(error);
+                this.redAlert.show(this.navCtrl, error);
                 this.loaderIndicator.dismiss();
             });
     }

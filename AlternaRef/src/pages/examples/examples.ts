@@ -6,6 +6,7 @@ import { LoadingController } from 'ionic-angular';
 import 'rxjs/add/operator/debounceTime';
 import { TnvCodePage } from "../../pages/tnvcode/tnvcode";
 import { CalcPage } from "../../pages/calc/calc";
+import { RedAlert } from "../../components/redalert";
 
 @Component({
     selector: 'page-examples',
@@ -25,7 +26,8 @@ export class ExamplesPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public examplesSource: ExamplesSource,
-        public loadingCtrl: LoadingController
+        public loadingCtrl: LoadingController,
+        public redAlert: RedAlert
     ) {
         this.searchControl = new FormControl();
 
@@ -33,8 +35,6 @@ export class ExamplesPage {
         if (text) {
             this.searchTerm = text;
         }
-
-        //this.navCtrl.parent.select(3);
     }
 
     ionViewDidLoad() {
@@ -57,7 +57,7 @@ export class ExamplesPage {
             loaderIndicator.present();
             this.examplesSource.getList(this.searchTerm).then(
                 data => {
-                    console.log(data);
+                    //console.log(data);
                     this.isShowHint = false;
                     if (!data.success || data.data.data.length == 0) {
                         this.isShowNotFound = true;
@@ -70,7 +70,7 @@ export class ExamplesPage {
                     loaderIndicator.dismiss();
                 },
                 error => {
-                    console.error(error);
+                    this.redAlert.show(this.navCtrl, error);
                     loaderIndicator.dismiss();
                 });
         } else {
@@ -78,8 +78,6 @@ export class ExamplesPage {
             this.items = null;
             this.isShowNotFound = false;
         }
-
-        //console.log(this.isShowHint);
     }
 
     tnvedClick(code: string) {

@@ -5,8 +5,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DataSource {
-    //readonly endpoint = 'https://alterna.ltd/';
-    readonly endpoint = '/api/';
+    readonly endpoint = 'https://alterna.ltd/';
+    //readonly endpoint = '/api/';
 
     constructor(public http: Http) {
         
@@ -19,7 +19,7 @@ export class DataSource {
         } else {
             requestUrl += '?json=true';
         }
-        console.log(requestUrl);
+        //console.log(requestUrl);
         return this.http.get(requestUrl)
             .toPromise()
             .then(this.extractData)
@@ -41,8 +41,8 @@ export class DataSource {
             }
         }
 
-        console.log(requestUrl);
-        console.log(query_params);
+        //console.log(requestUrl);
+        //console.log(query_params);
         return this.http.post(requestUrl, query_params)
             .toPromise()
             .then(this.extractData)

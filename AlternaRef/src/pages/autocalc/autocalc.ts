@@ -5,6 +5,7 @@ import { NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 import { AutoCalcSource } from "../../providers/autocalcsource";
 import { AutoCalcResultPage } from "../../pages/autocalcresult/autocalcresult";
+import { RedAlert } from "../../components/redalert";
 
 @Component({
     selector: 'page-autocalc',
@@ -40,7 +41,8 @@ export class AutoCalcPage {
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
         public autoCalcSource: AutoCalcSource,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        public redAlert: RedAlert
     ) {
         this.chosenParams.year = new Date().getFullYear();
         for (var i = this.chosenParams.year; i > (this.chosenParams.year - 10); i--) {
@@ -59,7 +61,7 @@ export class AutoCalcPage {
         loaderIndicator.present();
         this.autoCalcSource.getParams(this.chosenParams.vehicle, this.chosenParams).then(
             data => {
-                console.log(data);
+                //console.log(data);
                 this.calcParams = data.data;
                 for (var i = 0; i < this.calcParams.calc_params.length; i++) {
                     if (!this.chosenParams[this.calcParams.calc_params[i].code]) {
@@ -74,7 +76,7 @@ export class AutoCalcPage {
                 loaderIndicator.dismiss();
             },
             error => {
-                console.error(error);
+                this.redAlert.show(this.navCtrl, error);
                 loaderIndicator.dismiss();
             }
         );
@@ -87,7 +89,7 @@ export class AutoCalcPage {
         loaderIndicator.present();
         this.autoCalcSource.getCalc(this.chosenParams.vehicle, this.chosenParams).then(
             data => {
-                console.log(data);
+                //console.log(data);
                 if (data.success) {
                     if ((data.data.calculation.hasOwnProperty("F") && data.data.calculation.F.hasOwnProperty("success") && data.data.calculation.F.success) ||
                         (data.data.calculation.U.hasOwnProperty("success") && data.data.calculation.U.success)) {
@@ -121,7 +123,7 @@ export class AutoCalcPage {
                 loaderIndicator.dismiss();
             },
             error => {
-                console.error(error);
+                this.redAlert.show(this.navCtrl, error);
                 loaderIndicator.dismiss();
             }
         );

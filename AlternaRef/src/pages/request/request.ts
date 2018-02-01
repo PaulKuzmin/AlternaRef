@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { MailSource } from "../../providers/mailsource";
 import { LoadingController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { RedAlert } from "../../components/redalert";
 
 @Component({
     selector: 'page-request',
@@ -22,7 +23,8 @@ export class RequestPage {
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
         public mailSource: MailSource,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        public redAlert: RedAlert
     ) {
         this.chosenParams.message = this.navParams.get("message");
         if (!this.chosenParams.message) {
@@ -70,7 +72,7 @@ export class RequestPage {
         loaderIndicator.present();
         this.mailSource.sendRequest(this.chosenParams).then(
             data => {
-                console.log(data);
+                //console.log(data);
                 if (data.success) {
                     this.chosenParams.name = "";
                     this.chosenParams.phone = "";
@@ -87,7 +89,7 @@ export class RequestPage {
                 loaderIndicator.dismiss();
             },
             error => {
-                console.error(error);
+                this.redAlert.show(this.navCtrl, error);
                 loaderIndicator.dismiss();
             }
         );

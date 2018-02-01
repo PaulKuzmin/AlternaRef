@@ -5,6 +5,7 @@ import { LoadingController } from 'ionic-angular';
 import { TnvedSource } from "../../providers/tnvedsource";
 import { ExamplesPage } from "../../pages/examples/examples";
 import { CalcPage } from "../../pages/calc/calc";
+import { RedAlert } from "../../components/redalert";
 
 @Component({
     selector: 'page-tnvcode',
@@ -20,7 +21,8 @@ export class TnvCodePage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
-        public tnvedSource: TnvedSource
+        public tnvedSource: TnvedSource,
+        public redAlert: RedAlert
     ) {
         this.code = this.navParams.get("code");
     }
@@ -38,12 +40,12 @@ export class TnvCodePage {
         this.loaderIndicator.present();
         this.tnvedSource.getCode(code).then(
             data => {
-                console.log(data);
+                //console.log(data);
                 this.codeData = data;
                 this.loaderIndicator.dismiss();
             },
             error => {
-                console.error(error);
+                this.redAlert.show(this.navCtrl, error);
                 this.loaderIndicator.dismiss();
             });
     }
@@ -53,7 +55,7 @@ export class TnvCodePage {
         if (searchCode.indexOf('_') > 8) {
             searchCode = searchCode.substr(0, searchCode.indexOf('_'));
         }
-        console.log(searchCode);
+        //console.log(searchCode);
         this.navCtrl.push(ExamplesPage, {
             text: searchCode
         });

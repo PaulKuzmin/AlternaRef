@@ -4,6 +4,7 @@ import { OisSource } from "../../providers/oissource";
 import { FormControl } from '@angular/forms';
 import { LoadingController } from 'ionic-angular';
 import 'rxjs/add/operator/debounceTime';
+import { RedAlert } from "../../components/redalert";
 
 @Component({
     selector: 'page-rois',
@@ -24,7 +25,8 @@ export class RoisPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public oisSource: OisSource,
-        public loadingCtrl: LoadingController
+        public loadingCtrl: LoadingController,
+        public redAlert: RedAlert
     ) {
         this.searchControl = new FormControl();
     }
@@ -42,7 +44,7 @@ export class RoisPage {
     }
 
     setFilteredItems() {
-        console.log(this.isShowHint);
+        //console.log(this.isShowHint);
         if (this.searchTerm.length > 0) {
             let loaderIndicator = this.loadingCtrl.create({
                 content: "Загрузка..."
@@ -65,7 +67,7 @@ export class RoisPage {
                     loaderIndicator.dismiss();
                 },
                 error => {
-                    console.error(error);
+                    this.redAlert.show(this.navCtrl, error);
                     loaderIndicator.dismiss();
                 });
         } else {

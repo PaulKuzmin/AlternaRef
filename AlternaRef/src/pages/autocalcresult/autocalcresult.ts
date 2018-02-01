@@ -40,7 +40,7 @@ export class AutoCalcResultPage {
     requestClick() {
         let message = '';
         if (this.data && this.data.hasOwnProperty("chosen") && this.data.chosen) {
-            console.log(this.data.chosen);
+            //console.log(this.data.chosen);
 
             let engines = {
                 f: 'бензиновый',
@@ -97,7 +97,7 @@ export class AutoCalcResultPage {
                 message += '; стоимость, дол.США: ' + this.data.chosen.cost;
             }
 
-            console.log(message);
+            //console.log(message);
         }
         this.navCtrl.push(RequestPage, {message: message});
     }

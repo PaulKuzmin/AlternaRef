@@ -30,6 +30,7 @@ import { AccordionComponent } from "../components/accordion/accordion";
 import { RateComponent } from "../components/rate/rate";
 import { DocumentComponent } from "../components/document/document";
 import { IonCardContentCollapsableComponent } from "../components/ion-card-content-collapsable/ion-card-content-collapsable";
+import { RedAlert } from '../components/redalert';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { IonCardContentCollapsableComponent } from "../components/ion-card-conte
       AutoCalcSource,
       MailSource,
       ContactSource,
+      RedAlert,
       { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
