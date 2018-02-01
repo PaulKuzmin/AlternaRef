@@ -26706,6 +26706,11 @@ page-autocalc .max-width {
 page-autocalc .label {
   color: #999;
   font-size: 1.4rem !important;
+  font-weight: bold;
+}
+
+page-autocalc .text-input {
+  font-style: italic;
 }
 
 page-autocalcresult .alt-title {
@@ -26742,6 +26747,13 @@ page-autocalcresult .alt-rate-name {
   font-size: 1.3rem;
 }
 
+page-autocalcresult #challengeID p {
+  font-weight: bold;
+  color: #FF8B00;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
 page-calc .alt-title {
   padding: 5px 5px 0px 5px;
   font-size: 1.6rem;
@@ -26756,6 +26768,7 @@ page-calc .max-width {
 page-calc .label {
   color: #999;
   font-size: 1.4rem !important;
+  font-weight: bold;
 }
 
 page-calc .alt-hint {
@@ -26766,6 +26779,14 @@ page-calc .alt-hint {
 
 page-calc .card-content {
   padding: 5px 5px;
+}
+
+page-calc .searchbar-input {
+  font-style: italic !important;
+}
+
+page-calc .text-input {
+  font-style: italic;
 }
 
 page-calcresult .alt-title {
@@ -26800,6 +26821,17 @@ page-calcresult .card-content {
 
 page-calcresult .alt-rate-name {
   font-size: 1.3rem;
+}
+
+page-calcresult #challengeID p {
+  font-weight: bold;
+  color: #FF8B00;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+page-examples .searchbar-input {
+  font-style: italic !important;
 }
 
 page-home .center {
@@ -26888,6 +26920,11 @@ page-request .item {
 page-request .label {
   color: #999;
   font-size: 1.4rem !important;
+  font-weight: bold;
+}
+
+page-request .text-input {
+  font-style: italic;
 }
 
 page-rois .card-header {
@@ -26907,6 +26944,10 @@ page-rois .rois-image {
   height: 150px;
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+page-rois .searchbar-input {
+  font-style: italic !important;
 }
 
 page-tnvcode .alt-title {
